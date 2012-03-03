@@ -6,8 +6,27 @@ public class VarNote extends TreeNode {
 
     private String name;
 
+    private boolean cashedTreeValue = false;
+    private TreeNode valueTree = null;
+
+
     public VarNote(String name) {
         this.name = name;
+    }
+
+    private TreeNode getTreeValue() {
+        
+        if(valueTree != null){            
+            return valueTree;
+        }
+        
+        if (!cashedTreeValue) {
+            valueTree = super.findVarInContext(this.name);            
+            cashedTreeValue = true;                               
+        }
+        
+        return valueTree;
+        
     }
 
     @Override
@@ -17,20 +36,33 @@ public class VarNote extends TreeNode {
 
     @Override
     public String toString() {
-        
-        TreeNode n = super.findVarInContext(this.name);
-        
-        if(n!= null){
-            return "x\n" + n.toString() + "\n";
+                
+        if (getTreeValue() != null) {
+            return "x\n" + getTreeValue().toString() + "\n";
         }
-        
+
         return "x\n" + name + "\n";
+
+    }
+
+    @Override
+    public TreeNode clone() {
+        return new VarNote(this.name);
+    }
+
+    @Override
+    protected boolean canReturnConstant() {
+        
+        if(getTreeValue() == null)
+            return false;
+        
+        return getTreeValue().canReturnConstant();
         
     }
 
     @Override
-    public TreeNode clone() {        
-        return new VarNote(this.name);        
+    public int getConstantValue() {
+        return getTreeValue().getConstantValue();
     }
-    
+
 }

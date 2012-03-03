@@ -3,7 +3,6 @@ package TreeNodeTypes;
 
 public class ConstantNode extends TreeNode {
 
-
     final int value;
 
     public ConstantNode(int value) {
@@ -18,6 +17,16 @@ public class ConstantNode extends TreeNode {
     @Override
     public TreeNode clone() {
         return new ConstantNode(this.value);
+    }
+
+    @Override
+    protected boolean canReturnConstant() {
+        return true;
+    }
+
+    @Override
+    public int getConstantValue() {
+        return value;
     }
     
 }

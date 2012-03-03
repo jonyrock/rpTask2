@@ -13,14 +13,14 @@ public class Parser {
     protected ArrayList<String> levelTokens = null;
 
     public Parser(String expression) {
-        
+
         this.expression = expression;
 
     }
 
     public TreeNode parse() throws ParsingException {
-        
-        if (levelTokens == null){
+
+        if (levelTokens == null) {
             fillLevelTokens();
         }
 
@@ -35,9 +35,9 @@ public class Parser {
         }
 
         raiseBracketsForOperations();
-        
-        if(levelTokens.size() == 5){
-            if(levelTokens.get(1).equals("?")){
+
+        if (levelTokens.size() == 5) {
+            if (levelTokens.get(1).equals("?")) {
                 return new ConditionParser(this.levelTokens).parse();
             }
         }
@@ -57,11 +57,13 @@ public class Parser {
     }
 
     private void raiseBracketsForOperations() {
+
         raiseBracketsForOperation("*");
         raiseBracketsForOperation("/");
         raiseBracketsForOperation("-");
         raiseBracketsForOperation("+");
         raiseBracketsForOperation("%");
+
     }
 
     private void raiseBracketsForOperation(String operation) {

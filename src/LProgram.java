@@ -23,8 +23,8 @@ public class LProgram {
         
         TreeNode tree = new Parser(expression).parse();
         tree.parent = root;
-        
-        return tree;
+                
+        return tree.evaluate();
         
     }
 

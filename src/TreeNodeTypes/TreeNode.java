@@ -55,7 +55,7 @@ public class TreeNode {
 
 
     }
-
+    
     protected HashMap<String, TreeNode> cloneContext() {
 
 //        HashMap<String, TreeNode> newContext = new HashMap<String, TreeNode>(context.size());
@@ -65,9 +65,16 @@ public class TreeNode {
 //        }
 
 //         return newContext;
-
         return (HashMap<String, TreeNode>) this.context.clone();
 
     }
-
+    
+    protected boolean canReturnConstant(){
+        return false;
+    }
+    
+    public int getConstantValue(){
+        throw new NullPointerException("Not implemented");
+    }
+    
 }

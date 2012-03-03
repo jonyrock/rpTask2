@@ -35,4 +35,15 @@ public class FunctionNode extends TreeNode {
 
     }
 
+    @Override
+    protected boolean canReturnConstant() {
+        return body.canReturnConstant();
+    }
+
+    @Override
+    public int getConstantValue() {
+        return body.getConstantValue();
+    }
+
+    
 }
