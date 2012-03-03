@@ -11,7 +11,7 @@ public class ApplyNode extends TreeNode {
         this.argument = argument;
         
         this.function.parent = this;
-        // and no setting parent for argument
+        this.argument.parent = this;
 
     }
 
