@@ -10,7 +10,8 @@ public class Main {
         String str = "foo = { {} } 1 32 x { { } } (12 + x) - (12 * x) foo  (4 * (8-9))";
         
         //String lstr = "{x -> {y -> x + y}} 1 2";
-        String lstr = "{n->n ? n * (fact n-1) : 1}";
+        //String lstr = "{n->n ? n * (fact n-1) : 1}";
+        String  lstr = "fact = {n -> n ? n * (fact n-1) : 1}; main = {x->x} 2";
         
         //TreeNode root = new Parser(lstr).parse();
 
