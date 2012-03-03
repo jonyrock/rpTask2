@@ -14,6 +14,10 @@ public class ConditionNode extends TreeNode{
         this.trueTree = trueTree;
         this.falseTree = falseTree;
         
+        this.conditionTree.parent = this;
+        this.trueTree.parent = this;
+        this.falseTree = this;
+        
     }
 
     @Override

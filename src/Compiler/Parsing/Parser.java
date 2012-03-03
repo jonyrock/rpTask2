@@ -13,15 +13,16 @@ public class Parser {
     protected ArrayList<String> levelTokens = null;
 
     public Parser(String expression) {
-
+        
         this.expression = expression;
 
     }
 
     public TreeNode parse() throws ParsingException {
-
-        if (levelTokens == null)
+        
+        if (levelTokens == null){
             fillLevelTokens();
+        }
 
         if (levelTokens.size() == 3) {
             String sign = levelTokens.get(1);

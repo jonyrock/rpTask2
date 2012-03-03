@@ -17,6 +17,14 @@ public class VarNote extends TreeNode {
 
     @Override
     public String toString() {
+        
+        TreeNode n = super.findVarInContext(this.name);
+        
+        if(n!= null){
+            return "x\n" + n.toString() + "\n";
+        }
+        
         return "x\n" + name + "\n";
+        
     }
 }

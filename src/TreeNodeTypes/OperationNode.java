@@ -7,10 +7,16 @@ public class OperationNode extends TreeNode{
     protected TreeNode leftTree;
     protected TreeNode rightTree;
     
-    public OperationNode(String operationSign, TreeNode left, TreeNode right){
+    public OperationNode(String operationSign, TreeNode left, TreeNode right){        
+        
         this.operationSign = operationSign;
+        
         this.leftTree = left;
         this.rightTree = right;
+        
+        this.leftTree.parent = this;
+        this.rightTree.parent = this;
+        
     }
 
     @Override

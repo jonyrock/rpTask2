@@ -7,8 +7,11 @@ public class ApplyNode extends TreeNode {
 
     public ApplyNode(TreeNode function, TreeNode argument) {
 
-        this.function = function;
+        this.function = function;        
         this.argument = argument;
+        
+        this.function.parent = this;
+        // and no setting parent for argument
 
     }
 
