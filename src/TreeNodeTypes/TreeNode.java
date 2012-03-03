@@ -12,8 +12,8 @@ public class TreeNode {
         this.context = new HashMap<String, TreeNode>();
     }
 
-    public int getValue() {
-        return 0;
+    public TreeNode evaluate() {
+        throw new NullPointerException("Not implemented");
     }
 
     public TreeNode clone() {

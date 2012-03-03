@@ -15,7 +15,7 @@ public class VarNonValueNode extends TreeNode {
     }
 
     @Override
-    public int getValue() {
+    public TreeNode evaluate() {
         throw new NullPointerException("Not implemented");
     }
 

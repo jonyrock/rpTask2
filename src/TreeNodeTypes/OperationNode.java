@@ -19,7 +19,7 @@ public class OperationNode extends TreeNode{
     }
 
     @Override
-    public int getValue() {
+    public TreeNode evaluate() {
         throw new NullPointerException("Not implemented");
     }
 

@@ -21,7 +21,7 @@ public class ConditionNode extends TreeNode{
     }
 
     @Override
-    public int getValue() {
+    public TreeNode evaluate() {
         throw new NullPointerException("Not implemented");
     }
 
