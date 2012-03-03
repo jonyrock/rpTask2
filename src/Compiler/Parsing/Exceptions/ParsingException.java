@@ -1,4 +1,4 @@
-package Parsing.Exceptions;
+package Compiler.Parsing.Exceptions;
 
 /**
  * Created by IntelliJ IDEA.

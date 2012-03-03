@@ -1,6 +1,6 @@
-package Parsing;
+package Compiler.Parsing;
 
-import Parsing.Exceptions.ParsingException;
+import Compiler.Parsing.Exceptions.ParsingException;
 import TreeNodeTypes.TreeNode;
 import TreeNodeTypes.VarNote;
 

@@ -1,6 +1,6 @@
-package Parsing;
+package Compiler.Parsing;
 
-import Parsing.Exceptions.ParsingException;
+import Compiler.Parsing.Exceptions.ParsingException;
 import TreeNodeTypes.ApplyNode;
 import TreeNodeTypes.TreeNode;
 
@@ -34,6 +34,12 @@ public class Parser {
         }
 
         raiseBracketsForOperations();
+        
+        if(levelTokens.size() == 5){
+            if(levelTokens.get(1).equals("?")){
+                return new ConditionParser(this.levelTokens).parse();
+            }
+        }
 
         if (levelTokens.size() == 1) {
             return singleParse();
