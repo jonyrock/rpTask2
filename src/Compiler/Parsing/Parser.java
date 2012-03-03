@@ -61,6 +61,7 @@ public class Parser {
         raiseBracketsForOperation("/");
         raiseBracketsForOperation("-");
         raiseBracketsForOperation("+");
+        raiseBracketsForOperation("%");
     }
 
     private void raiseBracketsForOperation(String operation) {

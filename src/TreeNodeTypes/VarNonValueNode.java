@@ -10,6 +10,10 @@ public class VarNonValueNode extends TreeNode {
         this.codeName = "$" + (varNum++);
     }
 
+    public VarNonValueNode(String codeName) {
+        this.codeName = codeName;
+    }
+
     @Override
     public int getValue() {
         throw new NullPointerException("Not implemented");
@@ -18,5 +22,10 @@ public class VarNonValueNode extends TreeNode {
     @Override
     public String toString() {
         return codeName;
+    }
+
+    @Override
+    public TreeNode clone() {
+        return new VarNonValueNode(this.codeName);
     }
 }

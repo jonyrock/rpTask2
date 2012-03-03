@@ -15,6 +15,7 @@ public class Preprocessor {
         step = step.replace("+", " + ");
         step = step.replace("*", " * ");
         step = step.replace("/", " / ");
+        //step.
         
         while (step.contains("  ")) {
             step = step.replace("  ", " ");

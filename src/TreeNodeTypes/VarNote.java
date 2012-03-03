@@ -27,4 +27,10 @@ public class VarNote extends TreeNode {
         return "x\n" + name + "\n";
         
     }
+
+    @Override
+    public TreeNode clone() {        
+        return new VarNote(this.name);        
+    }
+    
 }

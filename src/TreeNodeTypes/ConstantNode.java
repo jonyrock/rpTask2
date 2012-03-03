@@ -19,4 +19,10 @@ public class ConstantNode extends TreeNode {
     public String toString() {
         return "!\n" + value + "\n";
     }
+
+    @Override
+    public TreeNode clone() {
+        return new ConstantNode(this.value);
+    }
+    
 }

@@ -24,4 +24,10 @@ public class ApplyNode extends TreeNode {
     public String toString() {
         return "a\n" + function.toString() + argument.toString();
     }
+
+    @Override
+    public TreeNode clone() {
+        return new ApplyNode(this.function.clone(), this.argument.clone());
+    }
+    
 }

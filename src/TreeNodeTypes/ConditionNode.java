@@ -16,7 +16,7 @@ public class ConditionNode extends TreeNode{
         
         this.conditionTree.parent = this;
         this.trueTree.parent = this;
-        this.falseTree = this;
+        this.falseTree.parent = this;
         
     }
 
@@ -29,6 +29,12 @@ public class ConditionNode extends TreeNode{
     public String toString() {
         return "?\n"+ this.conditionTree.toString() +
                 trueTree.toString() + falseTree.toString();
+    }
+
+    @Override
+    public TreeNode clone() {
+        return new ConditionNode(this.conditionTree.clone(), 
+                this.trueTree.clone(), this.falseTree.clone());
     }
     
 }

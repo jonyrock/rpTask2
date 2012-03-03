@@ -9,8 +9,7 @@ public class OperationNode extends TreeNode{
     
     public OperationNode(String operationSign, TreeNode left, TreeNode right){        
         
-        this.operationSign = operationSign;
-        
+        this.operationSign = operationSign;        
         this.leftTree = left;
         this.rightTree = right;
         
@@ -29,5 +28,12 @@ public class OperationNode extends TreeNode{
         return "@\n"+ this.operationSign + "\n" + 
                 leftTree.toString() + rightTree.toString();
     }
-    
+
+    @Override
+    public TreeNode clone() {
+                        
+        return new OperationNode(this.operationSign,
+                this.leftTree.clone(), this.rightTree.clone());
+        
+    }
 }
