@@ -16,7 +16,11 @@ public class ConstantNode extends TreeNode {
 
     @Override
     public TreeNode clone() {
-        return new ConstantNode(this.value);
+        
+       ConstantNode n = new ConstantNode(this.value);
+       n.parent = this.parent;
+       return n;
+               
     }
 
     @Override

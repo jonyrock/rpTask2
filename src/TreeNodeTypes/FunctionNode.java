@@ -31,11 +31,13 @@ public class FunctionNode extends TreeNode {
     @Override
     public TreeNode clone() {
 
-        FunctionNode newTree = new FunctionNode(this.argName);
-        newTree.context = super.cloneContext();
-        newTree.body = this.body.clone();
-
-        return newTree;
+        FunctionNode n = new FunctionNode(this.argName);
+        n.parent = this.parent;        
+        n.context = super.cloneContext();
+        n.body = this.body.clone();
+        n.body.parent = this;
+        
+        return n;
 
     }
 
@@ -52,7 +54,9 @@ public class FunctionNode extends TreeNode {
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
 
-        if (super.context.get(argName).canReturnConstant()) {
+        super.context.put(argName, super.context.get(argName).evaluate());
+
+        if (substitutedArg) {
 
             return body.evaluate();
 
@@ -85,4 +89,5 @@ public class FunctionNode extends TreeNode {
         }
 
     }
+
 }

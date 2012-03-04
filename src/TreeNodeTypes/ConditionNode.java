@@ -55,8 +55,13 @@ public class ConditionNode extends TreeNode {
 
     @Override
     public TreeNode clone() {
-        return new ConditionNode(this.conditionTree.clone(),
-                this.trueTree.clone(), this.falseTree.clone());
+        
+        ConditionNode n = new ConditionNode(this.conditionTree.clone(),
+                        this.trueTree.clone(), this.falseTree.clone());
+        
+        n.parent = this.parent;
+        
+        return n;
     }
 
     @Override

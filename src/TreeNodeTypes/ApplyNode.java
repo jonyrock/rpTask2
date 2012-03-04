@@ -19,8 +19,11 @@ public class ApplyNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
+        
         this.substituteArgumentOnce();
+                        
         return this.function.evaluate();
+        
     }
 
 
@@ -58,7 +61,7 @@ public class ApplyNode extends TreeNode {
         if (argumentSubstituted)
             return;
 
-        this.function.substitute(this.argument);
+        this.function.substitute(this.argument.clone());
         argumentSubstituted = true;
 
     }

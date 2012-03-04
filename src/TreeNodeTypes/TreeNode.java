@@ -22,6 +22,7 @@ public class TreeNode {
 
         TreeNode newTree = new TreeNode();
         newTree.context = this.cloneContext();
+        newTree.parent = this.parent;
 
         return newTree;
 
@@ -60,14 +61,18 @@ public class TreeNode {
 
     protected HashMap<String, TreeNode> cloneContext() {
 
-//        HashMap<String, TreeNode> newContext = new HashMap<String, TreeNode>(context.size());
-//
-//        for (String key : this.context.keySet()) {
-//            newContext.put(key, this.context.get(key).clone());
-//        }
+        HashMap<String, TreeNode> newContext = 
+                new HashMap<String, TreeNode>(context.size());
 
-//         return newContext;
-        return (HashMap<String, TreeNode>) this.context.clone();
+        for (String key : this.context.keySet()) {
+            TreeNode n = this.context.get(key).clone();
+            n.parent = this.parent;
+            newContext.put(key, n);
+        }
+
+        return newContext;
+        
+        //return (HashMap<String, TreeNode>) this.context.clone();
 
     }
 

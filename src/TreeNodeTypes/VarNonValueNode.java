@@ -16,7 +16,7 @@ public class VarNonValueNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() {
-        return this.clone();
+        return this;
     }
 
     @Override
@@ -31,6 +31,8 @@ public class VarNonValueNode extends TreeNode {
 
     @Override
     public TreeNode clone() {
-        return new VarNonValueNode(this.codeName);
+        TreeNode n = new VarNonValueNode(this.codeName);
+        n.parent = this.parent;
+        return n;
     }
 }

@@ -51,8 +51,10 @@ public class OperationNode extends TreeNode {
     @Override
     public TreeNode clone() {
 
-        return new OperationNode(this.operationSign,
+        TreeNode n = new OperationNode(this.operationSign,
                 this.leftTree.clone(), this.rightTree.clone());
+        n.parent = this.parent;
+        return n;
 
     }
 

@@ -5,14 +5,17 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        //String t1 = "fact = {n -> n ? n * (fact n-1) : 1}| main = {x->x} 2";
-        String t2 = "i = {y->y + y + z}";
+        String t2 = "i = {y->y + y};";
+        String t3 = "fact = {n -> n ? n * (fact n-1) : 1};";
+        String t4 = "succ = {y-> y + 1}; m = {x -> succc x};";
 
-        LProgram program = new LProgram(t2);
+        LProgram program = new LProgram(t4);
 
         //TreeNode tree = program.evaluate("{x-> {y-> (i x) + 2 }} 2 1");
 
-        TreeNode tree = program.evaluate("{ x -> (i 2) + x} 1");
+        TreeNode tree = program.evaluate("{x -> x 1} succ");
+
+        //System.out.println(program.term("succc"));
 
         System.out.print(tree);
 

@@ -34,8 +34,11 @@ public class LCompiler {
 
             String arg = termMatcher.group(1);
             String body = termMatcher.group(2);
-
-            this.program.context.put(arg, new Parser(body).parse());
+            
+            TreeNode parsedTerm =  new Parser(body).parse();
+            parsedTerm.parent = program;
+            
+            this.program.context.put(arg, parsedTerm);
 
         }
 
