@@ -70,4 +70,15 @@ public class VarNode extends TreeNode {
         return getTreeValue().getConstantValue();
     }
 
+
+    @Override
+    public void substitute(TreeNode treeNode) {
+        
+        if(getTreeValue() == null){
+            return;
+        }
+        
+        getTreeValue().substitute(treeNode);
+        
+    }
 }
