@@ -26,8 +26,11 @@ public class LProgram {
         
         TreeNode tree = new Parser(expression).parse();
         tree.parent = root;
+        
+        TreeNode evalTree = tree.evaluate();
+        evalTree.parent = this.root;
                 
-        return tree.evaluate();
+        return evalTree;
         
     }
 

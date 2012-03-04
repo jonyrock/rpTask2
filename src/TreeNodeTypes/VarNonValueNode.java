@@ -16,11 +16,16 @@ public class VarNonValueNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() {
-        throw new NullPointerException("Not implemented");
+        return this.clone();
     }
 
     @Override
     public String toString() {
+        return "x\n" + codeName + "\n";
+    }
+
+    @Override
+    public String clearName() {
         return codeName;
     }
 

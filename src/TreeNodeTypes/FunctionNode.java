@@ -21,7 +21,8 @@ public class FunctionNode extends TreeNode {
 
     @Override
     public String toString() {
-        return "f\n" + super.context.get(argName) + "\n" + this.body.toString();
+        return "f\n" + super.context.get(argName).clearName() + "\n"
+                + this.body.toString();
     }
 
     @Override

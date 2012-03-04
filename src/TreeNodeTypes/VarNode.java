@@ -49,10 +49,13 @@ public class VarNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() {
-        if(canReturnConstant()){
-            return new ConstantNode(this.getConstantValue());
+        
+        if(getTreeValue() != null){
+            return this.getTreeValue().evaluate();
         }
+        
         return this.clone();
+        
     }
     
     @Override

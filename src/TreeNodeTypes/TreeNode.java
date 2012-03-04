@@ -81,4 +81,8 @@ public class TreeNode {
         throw new NullPointerException("Not implemented");
     }
     
+    public String clearName(){
+        return this.toString();
+    }
+    
 }
