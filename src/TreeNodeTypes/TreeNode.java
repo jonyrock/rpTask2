@@ -1,5 +1,7 @@
 package TreeNodeTypes;
 
+import LProgramm.LProgramRuntimeException;
+
 import java.util.HashMap;
 import java.util.Set;
 
@@ -12,12 +14,12 @@ public class TreeNode {
         this.context = new HashMap<String, TreeNode>();
     }
 
-    public TreeNode evaluate() {
+    public TreeNode evaluate() throws LProgramRuntimeException {
         throw new NullPointerException("Not implemented");
     }
 
     public TreeNode clone() {
-        
+
         TreeNode newTree = new TreeNode();
         newTree.context = this.cloneContext();
 
@@ -55,7 +57,7 @@ public class TreeNode {
 
 
     }
-    
+
     protected HashMap<String, TreeNode> cloneContext() {
 
 //        HashMap<String, TreeNode> newContext = new HashMap<String, TreeNode>(context.size());
@@ -68,21 +70,21 @@ public class TreeNode {
         return (HashMap<String, TreeNode>) this.context.clone();
 
     }
-    
-    protected boolean canReturnConstant(){
+
+    protected boolean canReturnConstant() throws LProgramRuntimeException {
         return false;
     }
-    
-    public int getConstantValue(){
+
+    public int getConstantValue() throws LProgramRuntimeException {
         throw new NullPointerException("Not implemented");
     }
-    
-    public void substitute(TreeNode treeNode){
-        throw new NullPointerException("Not implemented");
+
+    public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
+        throw new LProgramRuntimeException("Can't substitute in term");
     }
-    
-    public String clearName(){
+
+    public String clearName() {
         return this.toString();
     }
-    
+
 }

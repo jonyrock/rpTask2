@@ -1,5 +1,7 @@
 package TreeNodeTypes;
 
+import LProgramm.LProgramRuntimeException;
+
 public class FunctionNode extends TreeNode {
 
     TreeNode body;
@@ -38,17 +40,17 @@ public class FunctionNode extends TreeNode {
     }
 
     @Override
-    protected boolean canReturnConstant() {
+    protected boolean canReturnConstant() throws LProgramRuntimeException {
         return body.canReturnConstant();
     }
 
     @Override
-    public int getConstantValue() {
+    public int getConstantValue() throws LProgramRuntimeException {
         return body.getConstantValue();
     }
 
     @Override
-    public TreeNode evaluate() {
+    public TreeNode evaluate() throws LProgramRuntimeException {
 
         if (super.context.get(argName).canReturnConstant()) {
 
@@ -68,18 +70,18 @@ public class FunctionNode extends TreeNode {
     }
 
     @Override
-    public void substitute(TreeNode treeNode) {
+    public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
 
         if (!substitutedArg) {
-            
+
             super.context.put(argName, treeNode);
             substitutedArg = true;
-            
+
         } else {
-            
+
             body.substitute(super.context.get(argName));
             super.context.put(argName, treeNode);
-            
+
         }
 
     }

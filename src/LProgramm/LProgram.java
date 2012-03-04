@@ -1,3 +1,5 @@
+package LProgramm;
+
 import Compiler.LCompiler;
 import Compiler.Preprocessor;
 import Compiler.Parsing.Exceptions.ParsingException;
@@ -20,18 +22,18 @@ public class LProgram {
         return root.context.get(name);
     }
 
-    public TreeNode evaluate(String expression) throws ParsingException{
-        
+    public TreeNode evaluate(String expression) throws ParsingException, LProgramRuntimeException {
+
         expression = new Preprocessor(expression).preprocess();
-        
+
         TreeNode tree = new Parser(expression).parse();
         tree.parent = root;
-        
+
         TreeNode evalTree = tree.evaluate();
         evalTree.parent = this.root;
-                
+
         return evalTree;
-        
+
     }
 
 }

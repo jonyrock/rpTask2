@@ -1,6 +1,8 @@
 package TreeNodeTypes;
 
 
+import LProgramm.LProgramRuntimeException;
+
 public class ConditionNode extends TreeNode {
 
     private TreeNode conditionTree;
@@ -24,7 +26,7 @@ public class ConditionNode extends TreeNode {
     }
 
     @Override
-    public TreeNode evaluate() {
+    public TreeNode evaluate() throws LProgramRuntimeException {
 
         if (conditionTree.canReturnConstant()) {
 
@@ -58,7 +60,7 @@ public class ConditionNode extends TreeNode {
     }
 
     @Override
-    protected boolean canReturnConstant() {
+    protected boolean canReturnConstant() throws LProgramRuntimeException {
 
         return conditionTree.canReturnConstant() &&
                 trueTree.canReturnConstant() && falseTree.canReturnConstant();
@@ -66,7 +68,7 @@ public class ConditionNode extends TreeNode {
     }
 
     @Override
-    public int getConstantValue() {
+    public int getConstantValue() throws LProgramRuntimeException {
 
         if (conditionTree.getConstantValue() > 0) {
             return trueTree.getConstantValue();

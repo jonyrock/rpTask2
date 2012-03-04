@@ -1,6 +1,8 @@
 package TreeNodeTypes;
 
 
+import LProgramm.LProgramRuntimeException;
+
 public class VarNode extends TreeNode {
 
 
@@ -15,25 +17,24 @@ public class VarNode extends TreeNode {
     }
 
     private TreeNode getTreeValue() {
-        
-        if(valueTree != null){            
+
+        if (valueTree != null) {
             return valueTree;
         }
-        
+
         if (!cashedTreeValue) {
-            valueTree = super.findVarInContext(this.name);            
-            cashedTreeValue = true;                               
+            valueTree = super.findVarInContext(this.name);
+            cashedTreeValue = true;
         }
-        
+
         return valueTree;
-        
+
     }
 
-    
 
     @Override
     public String toString() {
-                
+
         if (getTreeValue() != null) {
             return "x\n" + getTreeValue().toString() + "\n";
         }
@@ -48,40 +49,40 @@ public class VarNode extends TreeNode {
     }
 
     @Override
-    public TreeNode evaluate() {
-        
-        if(getTreeValue() != null){
+    public TreeNode evaluate() throws LProgramRuntimeException {
+
+        if (getTreeValue() != null) {
             return this.getTreeValue().evaluate();
         }
-        
+
         return this.clone();
-        
-    }
-    
-    @Override
-    protected boolean canReturnConstant() {
-        
-        if(getTreeValue() == null)
-            return false;
-        
-        return getTreeValue().canReturnConstant();
-        
+
     }
 
     @Override
-    public int getConstantValue() {
+    protected boolean canReturnConstant() throws LProgramRuntimeException {
+
+        if (getTreeValue() == null)
+            return false;
+
+        return getTreeValue().canReturnConstant();
+
+    }
+
+    @Override
+    public int getConstantValue() throws LProgramRuntimeException {
         return getTreeValue().getConstantValue();
     }
 
 
     @Override
-    public void substitute(TreeNode treeNode) {
-        
-        if(getTreeValue() == null){
+    public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
+
+        if (getTreeValue() == null) {
             return;
         }
-        
+
         getTreeValue().substitute(treeNode);
-        
+
     }
 }

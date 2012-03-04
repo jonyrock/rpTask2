@@ -1,5 +1,7 @@
 package TreeNodeTypes;
 
+import LProgramm.LProgramRuntimeException;
+
 public class OperationNode extends TreeNode {
 
     public final String operationSign;
@@ -22,7 +24,7 @@ public class OperationNode extends TreeNode {
     }
 
     @Override
-    public TreeNode evaluate() {
+    public TreeNode evaluate() throws LProgramRuntimeException {
 
         if (this.canReturnConstant()) {
 
@@ -55,7 +57,7 @@ public class OperationNode extends TreeNode {
     }
 
     @Override
-    protected boolean canReturnConstant() {
+    protected boolean canReturnConstant() throws LProgramRuntimeException {
 
         return leftTree.canReturnConstant() &&
                 rightTree.canReturnConstant();
@@ -63,7 +65,7 @@ public class OperationNode extends TreeNode {
     }
 
     @Override
-    public int getConstantValue() {
+    public int getConstantValue() throws LProgramRuntimeException {
 
         if (this.operationSign.endsWith("+")) {
             return leftTree.getConstantValue() +
