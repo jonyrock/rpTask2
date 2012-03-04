@@ -19,10 +19,31 @@ public class ConditionNode extends TreeNode {
         this.falseTree.parent = this;
 
     }
+    
+    private ConditionNode(){
+        
+    }
 
     @Override
     public TreeNode evaluate() {
-        throw new NullPointerException("Not implemented");
+        
+        if(conditionTree.canReturnConstant()){
+            
+            if(conditionTree.getConstantValue() > 0){
+                return trueTree.evaluate();
+            }else {
+                return falseTree.evaluate();
+            }
+            
+        }
+        
+        ConditionNode evalChildsTree = new ConditionNode();
+        evalChildsTree.conditionTree = this.conditionTree.clone();
+        evalChildsTree.trueTree = this.trueTree.evaluate();
+        evalChildsTree.falseTree = this.falseTree.evaluate();
+        
+        return evalChildsTree;
+        
     }
 
     @Override

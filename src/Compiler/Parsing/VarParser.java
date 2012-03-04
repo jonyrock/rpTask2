@@ -2,7 +2,7 @@ package Compiler.Parsing;
 
 import Compiler.Parsing.Exceptions.ParsingException;
 import TreeNodeTypes.TreeNode;
-import TreeNodeTypes.VarNote;
+import TreeNodeTypes.VarNode;
 
 public class VarParser extends Parser{
     
@@ -12,6 +12,6 @@ public class VarParser extends Parser{
 
     @Override
     public TreeNode parse() throws ParsingException {
-        return new VarNote(expression);
+        return new VarNode(expression);
     }
 }

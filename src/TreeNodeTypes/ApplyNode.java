@@ -17,7 +17,8 @@ public class ApplyNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() {
-        throw new NullPointerException("Not implemented");
+        this.function.substitute(this);
+        return this.function.evaluate();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package TreeNodeTypes;
 
 
-public class VarNote extends TreeNode {
+public class VarNode extends TreeNode {
 
 
     private String name;
@@ -10,7 +10,7 @@ public class VarNote extends TreeNode {
     private TreeNode valueTree = null;
 
 
-    public VarNote(String name) {
+    public VarNode(String name) {
         this.name = name;
     }
 
@@ -44,7 +44,7 @@ public class VarNote extends TreeNode {
 
     @Override
     public TreeNode clone() {
-        return new VarNote(this.name);
+        return new VarNode(this.name);
     }
 
     @Override
