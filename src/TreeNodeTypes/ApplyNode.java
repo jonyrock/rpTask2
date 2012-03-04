@@ -22,6 +22,11 @@ public class ApplyNode extends TreeNode {
     }
 
     @Override
+    public void substitute(TreeNode treeNode) {
+        this.function.substitute(treeNode);
+    }
+
+    @Override
     public String toString() {
         return "a\n" + function.toString() + argument.toString();
     }

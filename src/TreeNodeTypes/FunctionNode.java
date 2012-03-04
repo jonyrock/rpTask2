@@ -4,6 +4,7 @@ public class FunctionNode extends TreeNode {
 
     TreeNode body;
     protected final String argName;
+    protected boolean substitutedArg = false;
 
     public FunctionNode(String argName, TreeNode body) {
 
@@ -50,26 +51,36 @@ public class FunctionNode extends TreeNode {
     public TreeNode evaluate() {
 
         if (super.context.get(argName).canReturnConstant()) {
-            
+
             return body.evaluate();
-            
+
         } else {
-            
+
             FunctionNode newFun = new FunctionNode(this.argName);
             newFun.context = super.cloneContext();
             newFun.body = this.body.evaluate();
             newFun.body.parent = this;
-            
+
             return newFun;
-            
+
         }
-        
+
     }
 
     @Override
     public void substitute(TreeNode treeNode) {
 
-        super.context.put(argName, treeNode);
+        if (!substitutedArg) {
+            
+            super.context.put(argName, treeNode);
+            substitutedArg = true;
+            
+        } else {
+            
+            body.substitute(super.context.get(argName));
+            super.context.put(argName, treeNode);
+            
+        }
 
     }
 }
