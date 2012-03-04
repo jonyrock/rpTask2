@@ -32,11 +32,11 @@ public class FunctionNode extends TreeNode {
     public TreeNode clone() {
 
         FunctionNode n = new FunctionNode(this.argName);
-        n.parent = this.parent;        
+        n.parent = this.parent;
         n.context = super.cloneContext();
         n.body = this.body.clone();
         n.body.parent = this;
-        
+
         return n;
 
     }
@@ -55,21 +55,12 @@ public class FunctionNode extends TreeNode {
     public TreeNode evaluate() throws LProgramRuntimeException {
 
         super.context.put(argName, super.context.get(argName).evaluate());
-
-        if (substitutedArg) {
-
+        this.body = body.evaluate();
+        
+        if(body.canReturnConstant())
             return body.evaluate();
-
-        } else {
-
-            FunctionNode newFun = new FunctionNode(this.argName);
-            newFun.context = super.cloneContext();
-            newFun.body = this.body.evaluate();
-            newFun.body.parent = this;
-
-            return newFun;
-
-        }
+        
+        return this.clone();
 
     }
 

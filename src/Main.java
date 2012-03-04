@@ -12,8 +12,11 @@ public class Main {
         LProgram program = new LProgram(t4);
 
         //TreeNode tree = program.evaluate("{x-> {y-> (i x) + 2 }} 2 1");
-
-        TreeNode tree = program.evaluate("({x -> x} succ) 1");
+        
+        
+        TreeNode tree = program.evaluate("{y-> y + 1} 1");
+        
+        //TreeNode tree = program.evaluate("({x -> x} succ) 1");
 
         //System.out.println(program.term("succc"));
 

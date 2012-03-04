@@ -26,18 +26,16 @@ public class OperationNode extends TreeNode {
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
 
+        this.leftTree = leftTree.evaluate();
+        this.rightTree = rightTree.evaluate();
+
         if (this.canReturnConstant()) {
 
             return new ConstantNode(this.getConstantValue());
 
         } else {
-
-            OperationNode newOperation = new OperationNode(this.operationSign);
-
-            newOperation.leftTree = this.leftTree.evaluate();
-            newOperation.rightTree = this.rightTree.evaluate();
-
-            return newOperation;
+            
+            return this.clone();
 
         }
     }
@@ -53,9 +51,9 @@ public class OperationNode extends TreeNode {
 
         TreeNode n = new OperationNode(this.operationSign,
                 this.leftTree.clone(), this.rightTree.clone());
-        
+
         n.parent = this.parent;
-        
+
         return n;
 
     }
