@@ -13,7 +13,7 @@ public class Main {
 
         //TreeNode tree = program.evaluate("{x-> {y-> (i x) + 2 }} 2 1");
 
-        TreeNode tree = program.evaluate("{x -> x 1} succ");
+        TreeNode tree = program.evaluate("({x -> x} succ) 1");
 
         //System.out.println(program.term("succc"));
 
