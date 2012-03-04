@@ -44,7 +44,31 @@ public class FunctionNode extends TreeNode {
     public int getConstantValue() {
         return body.getConstantValue();
     }
-    
-    
 
+    @Override
+    public TreeNode evaluate() {
+
+        if (super.context.get(argName).canReturnConstant()) {
+            
+            return body.evaluate();
+            
+        } else {
+            
+            FunctionNode newFun = new FunctionNode(this.argName);
+            newFun.context = super.cloneContext();
+            newFun.body = this.body.evaluate();
+            newFun.body.parent = this;
+            
+            return newFun;
+            
+        }
+        
+    }
+
+    @Override
+    public void substitute(TreeNode treeNode) {
+
+        super.context.put(argName, treeNode);
+
+    }
 }

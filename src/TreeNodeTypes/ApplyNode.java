@@ -17,7 +17,7 @@ public class ApplyNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() {
-        this.function.substitute(this);
+        this.function.substitute(this.argument);
         return this.function.evaluate();
     }
 
