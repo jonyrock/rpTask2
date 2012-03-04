@@ -22,7 +22,11 @@ public class OperationNode extends TreeNode{
     
     @Override
     public TreeNode evaluate() {
-        throw new NullPointerException("Not implemented");
+        if(this.canReturnConstant()){
+            return new ConstantNode(this.getConstantValue());
+        } else {
+            return this.clone();
+        }
     }
 
     @Override

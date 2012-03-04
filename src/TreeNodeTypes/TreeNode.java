@@ -77,4 +77,8 @@ public class TreeNode {
         throw new NullPointerException("Not implemented");
     }
     
+    public void substitute(TreeNode treeNode){
+        throw new NullPointerException("Not implemented");
+    }
+    
 }

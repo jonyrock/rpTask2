@@ -20,6 +20,11 @@ public class ConstantNode extends TreeNode {
     }
 
     @Override
+    public TreeNode evaluate() {
+        return this.clone();
+    }
+    
+    @Override
     protected boolean canReturnConstant() {
         return true;
     }

@@ -1,4 +1,5 @@
 import Compiler.LCompiler;
+import Compiler.Preprocessor;
 import Compiler.Parsing.Exceptions.ParsingException;
 import Compiler.Parsing.Parser;
 import TreeNodeTypes.TreeNode;
@@ -20,6 +21,8 @@ public class LProgram {
     }
 
     public TreeNode evaluate(String expression) throws ParsingException{
+        
+        expression = new Preprocessor(expression).preprocess();
         
         TreeNode tree = new Parser(expression).parse();
         tree.parent = root;

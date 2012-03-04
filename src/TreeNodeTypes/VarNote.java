@@ -29,10 +29,7 @@ public class VarNote extends TreeNode {
         
     }
 
-    @Override
-    public TreeNode evaluate() {
-        throw new NullPointerException("Not implemented");
-    }
+    
 
     @Override
     public String toString() {
@@ -50,6 +47,14 @@ public class VarNote extends TreeNode {
         return new VarNote(this.name);
     }
 
+    @Override
+    public TreeNode evaluate() {
+        if(canReturnConstant()){
+            return new ConstantNode(this.getConstantValue());
+        }
+        return this.clone();
+    }
+    
     @Override
     protected boolean canReturnConstant() {
         

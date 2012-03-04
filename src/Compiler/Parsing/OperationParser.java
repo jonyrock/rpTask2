@@ -22,7 +22,7 @@ public class OperationParser extends Parser {
     @Override
     public TreeNode parse() throws ParsingException {
         
-        if(OperationParser.isSign(levelTokens.get(1))){
+        if(!OperationParser.isSign(levelTokens.get(1))){
             throw new ParsingException("Expected sign but got: " + 
                     levelTokens.get(1));
         }
