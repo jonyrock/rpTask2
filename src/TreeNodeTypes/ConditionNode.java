@@ -26,28 +26,6 @@ public class ConditionNode extends TreeNode {
     }
 
     @Override
-    public TreeNode evaluate() throws LProgramRuntimeException {
-
-        if (conditionTree.canReturnConstant()) {
-
-            if (conditionTree.getConstantValue() > 0) {
-                return trueTree.evaluate();
-            } else {
-                return falseTree.evaluate();
-            }
-
-        }
-
-        ConditionNode evalChildsTree = new ConditionNode();
-        evalChildsTree.conditionTree = this.conditionTree.clone();
-        evalChildsTree.trueTree = this.trueTree.evaluate();
-        evalChildsTree.falseTree = this.falseTree.evaluate();
-
-        return evalChildsTree;
-
-    }
-
-    @Override
     public String toString() {
         return "?\n" + this.conditionTree.toString() +
                 trueTree.toString() + falseTree.toString();
@@ -60,28 +38,9 @@ public class ConditionNode extends TreeNode {
                         this.trueTree.clone(), this.falseTree.clone());
         
         n.parent = this.parent;
+        n.parentSubstitution = this.parentSubstitution;
         
         return n;
     }
-
-    @Override
-    protected boolean canReturnConstant() throws LProgramRuntimeException {
-
-        return conditionTree.canReturnConstant() &&
-                trueTree.canReturnConstant() && falseTree.canReturnConstant();
-
-    }
-
-    @Override
-    public int getConstantValue() throws LProgramRuntimeException {
-
-        if (conditionTree.getConstantValue() > 0) {
-            return trueTree.getConstantValue();
-        }
-
-        return falseTree.getConstantValue();
-
-    }
-
 
 }

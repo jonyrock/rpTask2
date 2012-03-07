@@ -51,56 +51,18 @@ public class VarNode extends TreeNode {
 
         VarNode n = new VarNode(this.name);
         n.parent = this.parent;
+        n.parentSubstitution = this.parentSubstitution;
         return n;
 
     }
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
-
-        if (getTreeValue() != null) {
-            return getTreeValue().evaluate();
+        TreeNode t = this.findVarInContext(this.name);
+        if(t != null){
+            return t.evaluate();
         }
         return this.clone();
-
     }
-
-    @Override
-    protected boolean canReturnConstant() throws LProgramRuntimeException {
-
-        if (getTreeValue() == null)
-            return false;
-
-        return getTreeValue().canReturnConstant();
-
-    }
-
-    @Override
-    public int getConstantValue() throws LProgramRuntimeException {
-        return getTreeValue().getConstantValue();
-    }
-
-    @Override
-    public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
-
-        if (getTreeValue() == null) {
-            return;
-        }
-
-        getTreeValue().substitute(treeNode);
-
-    }
-
-    @Override
-    public boolean canSubstitute() {
-
-        if (getTreeValue() == null) {
-            return false;
-        }
-
-        return getTreeValue().canSubstitute();
-
-    }
-
-
+    
 }

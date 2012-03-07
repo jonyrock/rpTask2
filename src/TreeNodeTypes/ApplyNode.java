@@ -7,6 +7,7 @@ public class ApplyNode extends TreeNode {
     private TreeNode function;
     private TreeNode argument;
 
+
     public ApplyNode(TreeNode function, TreeNode argument) {
 
         this.function = function;
@@ -18,52 +19,48 @@ public class ApplyNode extends TreeNode {
     }
 
     @Override
-    public TreeNode evaluate() throws LProgramRuntimeException {
-                
-        if(this.function.canSubstitute()){
-            this.substituteArgumentOnce();
-            return this.function.evaluate();
-        }
-                        
-        return this.clone();
-
-    }
-
-
-    @Override
-    public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
-        
-        // TODO: нужно вместо этого очередь
-        this.function.substitute(treeNode);
-        
-    }
-
-    @Override
     public String toString() {
         return "a\n" + function.toString() + argument.toString();
     }
 
     @Override
-    public TreeNode clone() {
-        return new ApplyNode(this.function.clone(), this.argument.clone());
+    public ApplyNode clone() {
+        
+        ApplyNode t = new ApplyNode(this.function.clone(), this.argument.clone());
+        t.parent = this.parent;
+        t.parentSubstitution = this.parentSubstitution;
+        
+        return t; 
     }
-
+    
     @Override
-    protected boolean canReturnConstant() throws LProgramRuntimeException {        
-        return function.canReturnConstant();
-    }
+    public TreeNode evaluate() throws LProgramRuntimeException {
 
-    @Override
-    public int getConstantValue() throws LProgramRuntimeException {        
-        return function.getConstantValue();
+        ApplyNode evalTree = this.clone();
+        
+        evalTree.argument = evalTree.argument.evaluate();
+        evalTree.function.substitute(evalTree.argument);
+        evalTree.function = evalTree.function.evaluate();
+        if(this.parentSubstitution != null){
+            evalTree.function.substitute(this.parentSubstitution.evaluate());
+            evalTree.function = evalTree.function.evaluate();
+        }
+        	    
+        return evalTree.function;
+                
     }
 
     
-
-    private void substituteArgumentOnce() throws LProgramRuntimeException {
-        
-        this.function.substitute(this.argument.evaluate());
-        
-    }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+

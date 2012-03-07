@@ -10,6 +10,8 @@ public class TreeNode {
     public HashMap<String, TreeNode> context;
     public TreeNode parent;
 
+    protected TreeNode parentSubstitution = null;
+
     public TreeNode() {
         this.context = new HashMap<String, TreeNode>();
     }
@@ -23,6 +25,7 @@ public class TreeNode {
         TreeNode newTree = new TreeNode();
         newTree.context = this.cloneContext();
         newTree.parent = this.parent;
+        newTree.parentSubstitution = this.parentSubstitution;
 
         return newTree;
 
@@ -80,12 +83,12 @@ public class TreeNode {
         return false;
     }
 
-    public int getConstantValue() throws LProgramRuntimeException {
+    public ConstantNode getConstantValue() throws LProgramRuntimeException {
         throw new NullPointerException("Not implemented");
     }
 
     public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
-        throw new LProgramRuntimeException("Can't substitute in term");
+        this.parentSubstitution = treeNode.clone();
     }
 
     public String clearName() {

@@ -6,7 +6,7 @@ public class FunctionNode extends TreeNode {
 
     TreeNode body;
     protected final String argName;
-    protected boolean substitutedArg = false;
+    
 
     public FunctionNode(String argName, TreeNode body) {
 
@@ -35,50 +35,15 @@ public class FunctionNode extends TreeNode {
         n.parent = this.parent;
         n.context = super.cloneContext();
         n.body = this.body.clone();
-        n.body.parent = n;
-        n.substitutedArg = this.substitutedArg;
+        n.body.parent = n;        
+        n.parentSubstitution = this.parentSubstitution;
 
         return n;
 
     }
 
     @Override
-    protected boolean canReturnConstant() throws LProgramRuntimeException {
-        return body.canReturnConstant();
-    }
-
-    @Override
-    public int getConstantValue() throws LProgramRuntimeException {
-        return body.getConstantValue();
-    }
-
-    @Override
-    public TreeNode evaluate() throws LProgramRuntimeException {
-
-        super.context.put(argName, super.context.get(argName).evaluate());
-        this.body = body.evaluate();
-
-        if (substitutedArg)
-            return body.clone();
-
-        return this.clone();
-
-    }
-
-    @Override
     public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
-        
-        if(!canSubstitute())
-            return;
-        
-        super.context.put(argName, treeNode);
-        substitutedArg = true;
-
+        this.context.put(argName, treeNode.clone());
     }
-
-    @Override
-    public boolean canSubstitute() {
-        return !substitutedArg;
-    }
-
 }

@@ -8,7 +8,7 @@ public class ConstantNode extends TreeNode {
     public ConstantNode(int value) {
         this.value = value;
     }
-    
+
     @Override
     public String toString() {
         return "!\n" + value + "\n";
@@ -16,26 +16,13 @@ public class ConstantNode extends TreeNode {
 
     @Override
     public TreeNode clone() {
-        
-       ConstantNode n = new ConstantNode(this.value);
-       n.parent = this.parent;
-       return n;
-               
+
+        ConstantNode n = new ConstantNode(this.value);
+        n.parent = this.parent;
+        n.parentSubstitution = this.parentSubstitution;
+        return n;
+
     }
 
-    @Override
-    public TreeNode evaluate() {
-        return this.clone();
-    }
-    
-    @Override
-    protected boolean canReturnConstant() {
-        return true;
-    }
 
-    @Override
-    public int getConstantValue() {
-        return value;
-    }
-    
 }

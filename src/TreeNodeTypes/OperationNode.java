@@ -24,35 +24,19 @@ public class OperationNode extends TreeNode {
     }
 
     @Override
-    public TreeNode evaluate() throws LProgramRuntimeException {
-
-        this.leftTree = leftTree.evaluate();        
-        this.rightTree = rightTree.evaluate();
-
-        if (this.canReturnConstant()) {
-
-            return new ConstantNode(this.getConstantValue());
-
-        } else {
-            
-            return this.clone();
-
-        }
-    }
-
-    @Override
     public String toString() {
         return "@\n" + this.operationSign + "\n" +
                 leftTree.toString() + rightTree.toString();
     }
 
     @Override
-    public TreeNode clone() {
+    public OperationNode clone() {
 
-        TreeNode n = new OperationNode(this.operationSign,
+        OperationNode n = new OperationNode(this.operationSign,
                 this.leftTree.clone(), this.rightTree.clone());
 
         n.parent = this.parent;
+        n.parentSubstitution = this.parentSubstitution;
 
         return n;
 
@@ -67,31 +51,44 @@ public class OperationNode extends TreeNode {
     }
 
     @Override
-    public int getConstantValue() throws LProgramRuntimeException {
+    public TreeNode evaluate() throws LProgramRuntimeException {
+        
+        if(leftTree.canReturnConstant() && rightTree.canReturnConstant()){
+            return getConstantValue();
+        } 
+        
+        OperationNode t = this.clone();
+        t.leftTree = t.leftTree.evaluate();
+        t.rightTree = t.rightTree.evaluate();
+        
+        return t;
+        
+    }
 
+    @Override
+    public ConstantNode getConstantValue() throws LProgramRuntimeException {
+        
+        int leftValue = leftTree.getConstantValue().value;
+        int rightValue = leftTree.getConstantValue().value;
+        
         if (this.operationSign.endsWith("+")) {
-            return leftTree.getConstantValue() +
-                    rightTree.getConstantValue();
+            return new ConstantNode(leftValue + rightValue);
         }
         if (this.operationSign.endsWith("-")) {
-            return leftTree.getConstantValue() -
-                    rightTree.getConstantValue();
+            return new ConstantNode(leftValue - rightValue);
         }
         if (this.operationSign.endsWith("*")) {
-            return leftTree.getConstantValue() *
-                    rightTree.getConstantValue();
+            return new ConstantNode(leftValue * rightValue);
         }
         if (this.operationSign.endsWith("/")) {
-            return leftTree.getConstantValue() /
-                    rightTree.getConstantValue();
+            return new ConstantNode(leftValue / rightValue);
         }
         if (this.operationSign.endsWith("%")) {
-            return leftTree.getConstantValue() %
-                    rightTree.getConstantValue();
+            return new ConstantNode(leftValue % rightValue);
         }
 
         throw new IllegalArgumentException("Undefined sign");
 
     }
-
+    
 }
