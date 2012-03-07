@@ -43,11 +43,12 @@ public class FunctionNode extends TreeNode {
 
     @Override
     public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
-        this.context.put(argName, treeNode.clone());        
+        this.context.put(argName, treeNode.clone());
     }
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
+
         //TODO add case when not defined vars
 
         FunctionNode n = this.clone();
@@ -58,6 +59,6 @@ public class FunctionNode extends TreeNode {
         } else {
             return n;
         }
-        
+
     }
 }

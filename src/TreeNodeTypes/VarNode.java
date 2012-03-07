@@ -58,11 +58,19 @@ public class VarNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
+        
         TreeNode t = this.findVarInContext(this.name);
-        if(t != null){
-            return t.evaluate();
+        
+        if (t != null) {
+            if (t.isTerm()) {
+                TreeNode tEval = t.evaluate();
+                tEval.parent = this.parent;
+                return tEval;
+            }
         }
+        
         return this.clone();
+        
     }
-    
+
 }

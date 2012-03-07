@@ -71,7 +71,7 @@ public class OperationNode extends TreeNode {
     public ConstantNode getConstantValue() throws LProgramRuntimeException {
         
         int leftValue = leftTree.getConstantValue().value;
-        int rightValue = leftTree.getConstantValue().value;
+        int rightValue = rightTree.getConstantValue().value;
         
         if (this.operationSign.endsWith("+")) {
             return new ConstantNode(leftValue + rightValue);

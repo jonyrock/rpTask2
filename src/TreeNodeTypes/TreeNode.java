@@ -95,8 +95,8 @@ public class TreeNode {
         return this.toString();
     }
     
-    public boolean canSubstitute(){
-        return false;
+    protected boolean isTerm(){
+        return true;
     }
     
 }
