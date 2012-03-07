@@ -26,7 +26,7 @@ public class OperationNode extends TreeNode {
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
 
-        this.leftTree = leftTree.evaluate();
+        this.leftTree = leftTree.evaluate();        
         this.rightTree = rightTree.evaluate();
 
         if (this.canReturnConstant()) {

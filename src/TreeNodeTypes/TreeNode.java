@@ -91,5 +91,9 @@ public class TreeNode {
     public String clearName() {
         return this.toString();
     }
-
+    
+    public boolean canSubstitute(){
+        return false;
+    }
+    
 }

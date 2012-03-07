@@ -35,7 +35,8 @@ public class FunctionNode extends TreeNode {
         n.parent = this.parent;
         n.context = super.cloneContext();
         n.body = this.body.clone();
-        n.body.parent = this;
+        n.body.parent = n;
+        n.substitutedArg = this.substitutedArg;
 
         return n;
 
@@ -56,29 +57,28 @@ public class FunctionNode extends TreeNode {
 
         super.context.put(argName, super.context.get(argName).evaluate());
         this.body = body.evaluate();
-        
-        if(body.canReturnConstant())
-            return body.evaluate();
-        
+
+        if (substitutedArg)
+            return body.clone();
+
         return this.clone();
 
     }
 
     @Override
     public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
+        
+        if(!canSubstitute())
+            return;
+        
+        super.context.put(argName, treeNode);
+        substitutedArg = true;
 
-        if (!substitutedArg) {
+    }
 
-            super.context.put(argName, treeNode);
-            substitutedArg = true;
-
-        } else {
-
-            body.substitute(super.context.get(argName));
-            super.context.put(argName, treeNode);
-
-        }
-
+    @Override
+    public boolean canSubstitute() {
+        return !substitutedArg;
     }
 
 }

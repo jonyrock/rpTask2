@@ -17,25 +17,27 @@ public class VarNode extends TreeNode {
     }
 
     private TreeNode getTreeValue() {
-        
-        if(valueTree != null){            
-            return valueTree;
-        }
-        
-        if (!cashedTreeValue) {
-            valueTree = super.findVarInContext(this.name);            
-            cashedTreeValue = true;                               
-        }
-        
-        return valueTree;
-        
+
+//        if (valueTree != null) {
+//            return valueTree;
+//        }
+//
+//        if (!cashedTreeValue) {
+//            valueTree = super.findVarInContext(this.name);
+//            cashedTreeValue = true;
+//        }
+        // TODO оптимизировать запросыы на верх, хранить только
+        // ссылку в контексте 
+        TreeNode t = super.findVarInContext(this.name);
+
+        return t;
+
     }
 
-    
 
     @Override
     public String toString() {
-                
+
         if (getTreeValue() != null) {
             return "x\n" + getTreeValue().toString() + "\n";
         }
@@ -46,47 +48,59 @@ public class VarNode extends TreeNode {
 
     @Override
     public TreeNode clone() {
-        
+
         VarNode n = new VarNode(this.name);
-        n.parent = this.parent;        
+        n.parent = this.parent;
         return n;
-        
+
     }
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
-        
-        if(getTreeValue() != null){
-            return this.getTreeValue().evaluate();
+
+        if (getTreeValue() != null) {
+            return getTreeValue().evaluate();
         }
         return this.clone();
-        
-    }
-    
-    @Override
-    protected boolean canReturnConstant() throws LProgramRuntimeException{
-        
-        if(getTreeValue() == null)
-            return false;
-        
-        return getTreeValue().canReturnConstant();
-        
+
     }
 
     @Override
-    public int getConstantValue()throws LProgramRuntimeException {
+    protected boolean canReturnConstant() throws LProgramRuntimeException {
+
+        if (getTreeValue() == null)
+            return false;
+
+        return getTreeValue().canReturnConstant();
+
+    }
+
+    @Override
+    public int getConstantValue() throws LProgramRuntimeException {
         return getTreeValue().getConstantValue();
     }
 
-
     @Override
-    public void substitute(TreeNode treeNode) throws LProgramRuntimeException{
-        
-        if(getTreeValue() == null){
+    public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
+
+        if (getTreeValue() == null) {
             return;
         }
-        
+
         getTreeValue().substitute(treeNode);
-        
+
     }
+
+    @Override
+    public boolean canSubstitute() {
+
+        if (getTreeValue() == null) {
+            return false;
+        }
+
+        return getTreeValue().canSubstitute();
+
+    }
+
+
 }

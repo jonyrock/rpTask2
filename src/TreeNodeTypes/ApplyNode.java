@@ -19,12 +19,13 @@ public class ApplyNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
-        
-        this.function = this.function.evaluate();
-        
-        this.substituteArgumentOnce();
-        
-        return this.function.evaluate();
+                
+        if(this.function.canSubstitute()){
+            this.substituteArgumentOnce();
+            return this.function.evaluate();
+        }
+                        
+        return this.clone();
 
     }
 
@@ -48,27 +49,21 @@ public class ApplyNode extends TreeNode {
     }
 
     @Override
-    protected boolean canReturnConstant() throws LProgramRuntimeException {
-        //this.substituteArgumentOnce();
+    protected boolean canReturnConstant() throws LProgramRuntimeException {        
         return function.canReturnConstant();
     }
 
     @Override
-    public int getConstantValue() throws LProgramRuntimeException {
-        this.substituteArgumentOnce();
+    public int getConstantValue() throws LProgramRuntimeException {        
         return function.getConstantValue();
     }
 
-    private boolean argumentSubstituted = false;
+    
 
     private void substituteArgumentOnce() throws LProgramRuntimeException {
-
-        if (argumentSubstituted)
-            return;
-
-        this.function.substitute(this.argument.clone());
-        argumentSubstituted = true;
-
+        
+        this.function.substitute(this.argument.evaluate());
+        
     }
 
 }
