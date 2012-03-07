@@ -34,5 +34,8 @@ public class VarNonValueNode extends TreeNode {
         return n;
     }
 
-    
+    @Override
+    public TreeNode evaluate() throws LProgramRuntimeException {
+        return this;
+    }
 }

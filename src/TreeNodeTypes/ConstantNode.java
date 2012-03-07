@@ -1,6 +1,8 @@
 package TreeNodeTypes;
 
 
+import LProgramm.LProgramRuntimeException;
+
 public class ConstantNode extends TreeNode {
 
     final int value;
@@ -24,5 +26,20 @@ public class ConstantNode extends TreeNode {
 
     }
 
+    // return this
+    @Override
+    public TreeNode evaluate() throws LProgramRuntimeException {
+        
+        return this;
+    }
 
+    @Override
+    protected boolean canReturnConstant() throws LProgramRuntimeException {
+        return true;
+    }
+
+    @Override
+    public ConstantNode getConstantValue() throws LProgramRuntimeException {
+        return this;
+    }
 }

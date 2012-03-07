@@ -52,14 +52,16 @@ public class OperationNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
-        
-        if(leftTree.canReturnConstant() && rightTree.canReturnConstant()){
-            return getConstantValue();
-        } 
-        
+
         OperationNode t = this.clone();
         t.leftTree = t.leftTree.evaluate();
         t.rightTree = t.rightTree.evaluate();
+        
+        if(t.leftTree.canReturnConstant() && t.rightTree.canReturnConstant()){
+            return t.getConstantValue();
+        } 
+        
+        
         
         return t;
         

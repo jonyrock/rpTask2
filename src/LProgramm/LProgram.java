@@ -4,7 +4,9 @@ import Compiler.LCompiler;
 import Compiler.Preprocessor;
 import Compiler.Parsing.Exceptions.ParsingException;
 import Compiler.Parsing.Parser;
+import TreeNodeTypes.FunctionNode;
 import TreeNodeTypes.TreeNode;
+import TreeNodeTypes.VarNode;
 
 
 public class LProgram {
@@ -26,11 +28,15 @@ public class LProgram {
 
         expression = new Preprocessor(expression).preprocess();
 
+        
+        VarNode evalNode = new VarNode("evalNode");
+        evalNode.parent = root;
+        
         TreeNode tree = new Parser(expression).parse();
-        tree.parent = root;
+        tree.parent = evalNode;
 
         TreeNode evalTree = tree.evaluate();
-        evalTree.parent = this.root;
+        evalTree.parent = evalNode;
 
         return evalTree;
 

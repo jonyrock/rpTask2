@@ -6,7 +6,7 @@ public class FunctionNode extends TreeNode {
 
     TreeNode body;
     protected final String argName;
-    
+
 
     public FunctionNode(String argName, TreeNode body) {
 
@@ -29,14 +29,13 @@ public class FunctionNode extends TreeNode {
     }
 
     @Override
-    public TreeNode clone() {
+    public FunctionNode clone() {
 
         FunctionNode n = new FunctionNode(this.argName);
         n.parent = this.parent;
         n.context = super.cloneContext();
         n.body = this.body.clone();
-        n.body.parent = n;        
-        n.parentSubstitution = this.parentSubstitution;
+        n.body.parent = n;
 
         return n;
 
@@ -44,6 +43,21 @@ public class FunctionNode extends TreeNode {
 
     @Override
     public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
-        this.context.put(argName, treeNode.clone());
+        this.context.put(argName, treeNode.clone());        
+    }
+
+    @Override
+    public TreeNode evaluate() throws LProgramRuntimeException {
+        //TODO add case when not defined vars
+
+        FunctionNode n = this.clone();
+        n.body = n.body.evaluate();
+
+        if (n.body.canReturnConstant()) {
+            return n.body;
+        } else {
+            return n;
+        }
+        
     }
 }
