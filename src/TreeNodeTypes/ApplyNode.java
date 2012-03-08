@@ -50,7 +50,11 @@ public class ApplyNode extends TreeNode {
         
         // TODO clone apply if not defined vars
         
-        return evalTree.function;
+        if(evalTree.function.isTerm()){        
+            return evalTree.function;
+        }else {
+            return evalTree;
+        }
 
     }
 

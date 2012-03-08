@@ -48,17 +48,16 @@ public class FunctionNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
-
-        //TODO add case when not defined vars
-
+        
         FunctionNode n = this.clone();
         n.body = n.body.evaluate();
 
-        if (n.body.canReturnConstant()) {
+        if (n.context.get(argName).isTerm()) {
             return n.body;
         } else {
             return n;
         }
 
     }
+    
 }

@@ -39,7 +39,7 @@ public class VarNode extends TreeNode {
     public String toString() {
 
         if (getTreeValue() != null) {
-            return "x\n" + getTreeValue().toString() + "\n";
+            return "x\n" + getTreeValue().toString();
         }
 
         return "x\n" + name + "\n";
@@ -71,6 +71,11 @@ public class VarNode extends TreeNode {
         
         return this.clone();
         
+    }
+
+    @Override
+    protected boolean isTerm() {
+        return this.findVarInContext(this.name) != null;
     }
 
 }

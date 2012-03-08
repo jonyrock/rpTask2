@@ -14,9 +14,11 @@ public class Main {
         
         //TreeNode tree = program.evaluate("1");
         //TreeNode tree = program.evaluate("{y-> y + 1} 1");
-        TreeNode tree = program.evaluate("succ 1");
-        //TreeNode tree = program.evaluate("{y-> y + 1}");
+        //TreeNode tree = program.evaluate("m 1");
+        //TreeNode tree = program.evaluate("sdf 2");
         //TreeNode tree = program.evaluate("{y-> (succ y) + (succ y) } 1");
+
+        TreeNode tree = program.evaluate("{a -> {b -> a + b }} 3 3");
         
         System.out.print(tree);
         
