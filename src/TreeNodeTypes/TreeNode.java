@@ -20,7 +20,7 @@ public class TreeNode {
         throw new NullPointerException("Not implemented");
     }
 
-    public TreeNode clone() {
+    public TreeNode copy() {
 
         TreeNode newTree = new TreeNode();
         newTree.context = this.cloneContext();
@@ -64,18 +64,18 @@ public class TreeNode {
 
     protected HashMap<String, TreeNode> cloneContext() {
 
-        HashMap<String, TreeNode> newContext = 
+        HashMap<String, TreeNode> newContext =
                 new HashMap<String, TreeNode>(context.size());
 
         for (String key : this.context.keySet()) {
-            TreeNode n = this.context.get(key).clone();
+            TreeNode n = this.context.get(key).copy();
             n.parent = this.parent;
             newContext.put(key, n);
         }
 
         return newContext;
-        
-        //return (HashMap<String, TreeNode>) this.context.clone();
+
+        //return (HashMap<String, TreeNode>) this.context.copy();
 
     }
 
@@ -88,15 +88,15 @@ public class TreeNode {
     }
 
     public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
-        this.parentSubstitution = treeNode.clone();
+        this.parentSubstitution = treeNode.copy();
     }
 
     public String clearName() {
         return this.toString();
     }
-    
-    protected boolean isTerm(){
+
+    protected boolean isTerm() {
         return true;
     }
-    
+
 }

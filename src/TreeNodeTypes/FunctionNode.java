@@ -29,12 +29,12 @@ public class FunctionNode extends TreeNode {
     }
 
     @Override
-    public FunctionNode clone() {
+    public FunctionNode copy() {
 
         FunctionNode n = new FunctionNode(this.argName);
         n.parent = this.parent;
         n.context = super.cloneContext();
-        n.body = this.body.clone();
+        n.body = this.body.copy();
         n.body.parent = n;
 
         return n;
@@ -43,13 +43,13 @@ public class FunctionNode extends TreeNode {
 
     @Override
     public void substitute(TreeNode treeNode) throws LProgramRuntimeException {
-        this.context.put(argName, treeNode.clone());
+        this.context.put(argName, treeNode.copy());
     }
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
-        
-        FunctionNode n = this.clone();
+
+        FunctionNode n = this.copy();
         n.body = n.body.evaluate();
 
         if (n.context.get(argName).isTerm()) {
@@ -59,5 +59,5 @@ public class FunctionNode extends TreeNode {
         }
 
     }
-    
+
 }

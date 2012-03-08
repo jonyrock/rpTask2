@@ -22,26 +22,38 @@ public class ConditionNode extends TreeNode {
 
     }
 
-    private ConditionNode() {
-    }
 
     @Override
     public String toString() {
-        return "?\n" + this.conditionTree.toString() +
-                trueTree.toString() + falseTree.toString();
+        return "?\n" + this.conditionTree + trueTree + falseTree;
     }
 
     @Override
-    public TreeNode clone() {
-        
-        ConditionNode n = new ConditionNode(this.conditionTree.clone(),
-                        this.trueTree.clone(), this.falseTree.clone());
-        
+    public ConditionNode copy() {
+
+        ConditionNode n = new ConditionNode(this.conditionTree.copy(),
+                this.trueTree.copy(), this.falseTree.copy());
+
         n.parent = this.parent;
         n.parentSubstitution = this.parentSubstitution;
-        
+
         return n;
     }
 
-    // TODO implement eval
+    @Override
+    public TreeNode evaluate() throws LProgramRuntimeException {
+
+        ConditionNode t = this.copy();
+        t.conditionTree = t.conditionTree.evaluate();
+        if (t.conditionTree.canReturnConstant()) {
+            if (t.conditionTree.getConstantValue().value > 0) {
+                return t.trueTree.evaluate();
+            } else {
+                return t.falseTree.evaluate();
+            }
+        }
+
+        return t;
+    }
+
 }

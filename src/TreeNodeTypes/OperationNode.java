@@ -19,10 +19,6 @@ public class OperationNode extends TreeNode {
 
     }
 
-    private OperationNode(String operationSign) {
-        this.operationSign = operationSign;
-    }
-
     @Override
     public String toString() {
         return "@\n" + this.operationSign + "\n" +
@@ -30,10 +26,10 @@ public class OperationNode extends TreeNode {
     }
 
     @Override
-    public OperationNode clone() {
+    public OperationNode copy() {
 
         OperationNode n = new OperationNode(this.operationSign,
-                this.leftTree.clone(), this.rightTree.clone());
+                this.leftTree.copy(), this.rightTree.copy());
 
         n.parent = this.parent;
         n.parentSubstitution = this.parentSubstitution;
@@ -53,26 +49,25 @@ public class OperationNode extends TreeNode {
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
 
-        OperationNode t = this.clone();
+        OperationNode t = this.copy();
         t.leftTree = t.leftTree.evaluate();
         t.rightTree = t.rightTree.evaluate();
-        
-        if(t.leftTree.canReturnConstant() && t.rightTree.canReturnConstant()){
+
+        if (t.leftTree.canReturnConstant() && t.rightTree.canReturnConstant()) {
             return t.getConstantValue();
-        } 
-        
-        
-        
+        }
+
+
         return t;
-        
+
     }
 
     @Override
     public ConstantNode getConstantValue() throws LProgramRuntimeException {
-        
+
         int leftValue = leftTree.getConstantValue().value;
         int rightValue = rightTree.getConstantValue().value;
-        
+
         if (this.operationSign.endsWith("+")) {
             return new ConstantNode(leftValue + rightValue);
         }
@@ -92,5 +87,5 @@ public class OperationNode extends TreeNode {
         throw new IllegalArgumentException("Undefined sign");
 
     }
-    
+
 }

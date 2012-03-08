@@ -8,9 +8,6 @@ public class VarNode extends TreeNode {
 
     private String name;
 
-    private boolean cashedTreeValue = false;
-    private TreeNode valueTree = null;
-
 
     public VarNode(String name) {
         this.name = name;
@@ -18,19 +15,7 @@ public class VarNode extends TreeNode {
 
     private TreeNode getTreeValue() {
 
-//        if (valueTree != null) {
-//            return valueTree;
-//        }
-//
-//        if (!cashedTreeValue) {
-//            valueTree = super.findVarInContext(this.name);
-//            cashedTreeValue = true;
-//        }
-        // TODO оптимизировать запросыы на верх, хранить только
-        // ссылку в контексте 
-        TreeNode t = super.findVarInContext(this.name);
-
-        return t;
+        return super.findVarInContext(this.name);
 
     }
 
@@ -47,7 +32,7 @@ public class VarNode extends TreeNode {
     }
 
     @Override
-    public TreeNode clone() {
+    public TreeNode copy() {
 
         VarNode n = new VarNode(this.name);
         n.parent = this.parent;
@@ -58,9 +43,9 @@ public class VarNode extends TreeNode {
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
-        
-        TreeNode t = this.findVarInContext(this.name);
-        
+
+        TreeNode t = getTreeValue();
+
         if (t != null) {
             if (t.isTerm()) {
                 TreeNode tEval = t.evaluate();
@@ -68,14 +53,14 @@ public class VarNode extends TreeNode {
                 return tEval;
             }
         }
-        
-        return this.clone();
-        
+
+        return this.copy();
+
     }
 
     @Override
     protected boolean isTerm() {
-        return this.findVarInContext(this.name) != null;
+        return getTreeValue() != null;
     }
 
 }

@@ -1,13 +1,11 @@
 package TreeNodeTypes;
 
 
-import LProgramm.LProgramRuntimeException;
-
 public class VarNonValueNode extends TreeNode {
-    
-    final String codeName; 
+
+    final String codeName;
     static int varNum;
-    
+
     public VarNonValueNode() {
         this.codeName = "$" + (varNum++);
     }
@@ -27,7 +25,7 @@ public class VarNonValueNode extends TreeNode {
     }
 
     @Override
-    public TreeNode clone() {
+    public TreeNode copy() {
         TreeNode n = new VarNonValueNode(this.codeName);
         n.parent = this.parent;
         n.parentSubstitution = this.parentSubstitution;

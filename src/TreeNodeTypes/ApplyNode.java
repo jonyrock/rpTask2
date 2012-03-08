@@ -24,9 +24,9 @@ public class ApplyNode extends TreeNode {
     }
 
     @Override
-    public ApplyNode clone() {
+    public ApplyNode copy() {
 
-        ApplyNode t = new ApplyNode(this.function.clone(), this.argument.clone());
+        ApplyNode t = new ApplyNode(this.function.copy(), this.argument.copy());
         t.parent = this.parent;
         t.parentSubstitution = this.parentSubstitution;
 
@@ -36,23 +36,22 @@ public class ApplyNode extends TreeNode {
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
 
-        ApplyNode evalTree = this.clone();
+        ApplyNode evalTree = this.copy();
 
         evalTree.argument = evalTree.argument.evaluate();
         evalTree.function = evalTree.function.evaluate();
         evalTree.function.substitute(evalTree.argument);
         evalTree.function = evalTree.function.evaluate();
-        
+
         if (this.parentSubstitution != null) {
             evalTree.function.substitute(this.parentSubstitution.evaluate());
             evalTree.function = evalTree.function.evaluate();
         }
-        
-        // TODO clone apply if not defined vars
-        
-        if(evalTree.function.isTerm()){        
+
+
+        if (evalTree.function.isTerm()) {
             return evalTree.function;
-        }else {
+        } else {
             return evalTree;
         }
 

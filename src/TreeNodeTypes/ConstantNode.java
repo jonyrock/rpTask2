@@ -17,7 +17,7 @@ public class ConstantNode extends TreeNode {
     }
 
     @Override
-    public TreeNode clone() {
+    public TreeNode copy() {
 
         ConstantNode n = new ConstantNode(this.value);
         n.parent = this.parent;
@@ -29,7 +29,7 @@ public class ConstantNode extends TreeNode {
     // return this
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {
-        
+
         return this;
     }
 
