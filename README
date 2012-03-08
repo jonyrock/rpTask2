@@ -1,1 +1,8 @@
-This file was created by IntelliJ IDEA 11.0.2 for binding GitHub repository
+Written by Alexey Velikiy, Evgeniy Krasko. APTU 2012.
+Usage: rpTask2 <FILE> [EXPR]
+Parse definitions from FILE and evaluate EXPR if it is.
+
+example 1: rpTask2 input.txt
+example 2: rpTask2 input.txt "{x-> defF x + 1} 2"
+In example 2 function defF defined in file input.txt");
+with others like this: "defF = {x->x*x}; id={x->x}; pi = 314"

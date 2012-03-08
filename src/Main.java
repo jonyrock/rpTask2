@@ -84,11 +84,15 @@ public class Main {
     }
 
     private static void printHelp() {
-        System.out.println("Written by Alexey Velikiy, Krasko Evgeniy. APTU 2012.");
-        System.out.println("Usage: <FILE> [EXPR]");
-        System.out.println("Example 1: input.txt");
-        System.out.println("Example 2: input.txt \" {x->x + 1}{x->x + 1} 2 \" ");
+        System.out.println("Written by Alexey Velikiy, Evgeniy Krasko. APTU 2012.");
+        System.out.println("Usage: rpTask2 <FILE> [EXPR]");
         System.out.println("Parse definitions from FILE and evaluate EXPR if it is.");
+        System.out.println();
+        System.out.println("example 1: rpTask2 input.txt");
+        System.out.println("example 2: rpTask2 input.txt \" {x-> defF x + 1} 2 \" ");
+        System.out.println("In example 2 function defF defined in file input.txt");
+        System.out.println("with others like this: \"defF = {x->x*x}; id={x->x}; pi = 314\"");
+
     }
 
 }
