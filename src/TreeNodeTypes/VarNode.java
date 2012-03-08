@@ -23,8 +23,11 @@ public class VarNode extends TreeNode {
     @Override
     public String toString() {
 
-        if (getTreeValue() != null) {
-            return "x\n" + getTreeValue().toString();
+        TreeNode t = getTreeValue();
+
+        if (t != null) {
+            if (!t.isTerm())
+                return "x\n" + t.toString();
         }
 
         return "x\n" + name + "\n";

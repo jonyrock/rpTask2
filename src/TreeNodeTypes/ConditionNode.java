@@ -22,7 +22,6 @@ public class ConditionNode extends TreeNode {
 
     }
 
-
     @Override
     public String toString() {
         return "?\n" + this.conditionTree + trueTree + falseTree;

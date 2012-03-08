@@ -12,7 +12,8 @@ public class Main {
     public static void main(String[] args) {
 
         if (args.length < 1) {
-            System.err.println("Need file path in first param.");
+            printHelp();
+            return;
         }
 
         String defs = getDefs(args[0]);
@@ -28,9 +29,7 @@ public class Main {
         }
 
         if (args.length < 2) {
-
             System.out.println(program.root);
-
         } else {
             try {
                 TreeNode tree = program.evaluate(args[1]);
@@ -85,9 +84,11 @@ public class Main {
     }
 
     private static void printHelp() {
-        System.out.println("Usage: ts2pl <FILE> [EXPR]");
-        System.out.println("Usage: ts2pl <FILE> [EXPR]");
-        System.out.println("Parse definitions from FILE and evaluate EXPR if it is");
+        System.out.println("Written by Alexey Velikiy, Krasko Evgeniy. APTU 2012.");
+        System.out.println("Usage: <FILE> [EXPR]");
+        System.out.println("Example 1: input.txt");
+        System.out.println("Example 2: input.txt \" {x->x + 1}{x->x + 1} 2 \" ");
+        System.out.println("Parse definitions from FILE and evaluate EXPR if it is.");
     }
 
 }
