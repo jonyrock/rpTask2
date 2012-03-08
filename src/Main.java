@@ -1,30 +1,86 @@
+import Compiler.Parsing.Exceptions.ParsingException;
 import LProgramm.LProgram;
 import TreeNodeTypes.TreeNode;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        String defs = "fact = {n -> n ? n * (fact n-1) : 1}; succ = {y-> y + 1}; m = {x -> succ x};";
+        if (args.length < 1) {
+            System.err.println("Need file path in first param.");
+        }
+
+        String defs = getDefs(args[0]);
+
+        LProgram program = null;
+
+        try {
+            program = new LProgram(defs);
+        } catch (ParsingException e) {
+            System.err.println("Parsing defs error: " + e.getMessage());
+            System.exit(2);
+        }
+
+        if (args.length < 2) {
+
+            System.out.println(program);
+
+        } else {
+            try {
+                TreeNode tree = program.evaluate(args[1]);
+                System.out.print(tree);
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }
 
 
-        LProgram program = new LProgram(defs);
+    }
 
+    private static String getDefs(String path) {
 
-        //TreeNode tree = program.evaluate("1");
-        //TreeNode tree = program.evaluate("{y-> y + 1} 1");
-        //TreeNode tree = program.evaluate("m 1");
-        //TreeNode tree = program.evaluate("sdf 2");
-        //TreeNode tree = program.evaluate("{y-> (succ y) + (succ y) } 1");
-        //TreeNode tree = program.evaluate("{a -> {b -> a + b }} 4 3");
-        //TreeNode tree = program.evaluate("x?2:1");
-        //TreeNode tree = program.evaluate("{x-> x ? x + x:x*x} 5");
-        //TreeNode tree = program.evaluate("fact 5");
+        FileReader reader = null;
+        boolean wasError = false;
 
-        TreeNode tree = program.evaluate("fact");
+        try {
 
-        System.out.print(tree);
+            reader = new FileReader(path);
+            BufferedReader bf = new BufferedReader(reader);
+            String s = null;
 
+            while (bf.ready()) {
+                s += bf.readLine();
+            }
+
+            return s;
+
+        } catch (FileNotFoundException e) {
+
+            System.out.println("Can't open file");
+            wasError = true;
+
+        } catch (IOException e) {
+
+            System.err.println(e.getMessage());
+
+        } finally {
+            try {
+                if (reader != null)
+                    reader.close();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }
+
+        if (wasError)
+            System.exit(1);
+
+        return null;
 
     }
 
