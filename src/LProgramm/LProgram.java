@@ -1,17 +1,16 @@
 package LProgramm;
 
 import Compiler.LCompiler;
-import Compiler.Preprocessor;
 import Compiler.Parsing.Exceptions.ParsingException;
 import Compiler.Parsing.Parser;
-import TreeNodeTypes.FunctionNode;
+import Compiler.Preprocessor;
 import TreeNodeTypes.TreeNode;
 import TreeNodeTypes.VarNode;
 
 
 public class LProgram {
 
-    private final TreeNode root;
+    public final TreeNode root;
 
     public LProgram(String defsSource) throws ParsingException {
 
@@ -28,10 +27,10 @@ public class LProgram {
 
         expression = new Preprocessor(expression).preprocess();
 
-        
+
         VarNode evalNode = new VarNode("evalNode");
         evalNode.parent = root;
-        
+
         TreeNode tree = new Parser(expression).parse();
         tree.parent = evalNode;
 

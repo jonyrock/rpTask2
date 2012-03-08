@@ -23,12 +23,13 @@ public class Main {
             program = new LProgram(defs);
         } catch (ParsingException e) {
             System.err.println("Parsing defs error: " + e.getMessage());
+            printHelp();
             System.exit(2);
         }
 
         if (args.length < 2) {
 
-            System.out.println(program);
+            System.out.println(program.root);
 
         } else {
             try {
@@ -38,7 +39,6 @@ public class Main {
                 System.err.println(e.getMessage());
             }
         }
-
 
     }
 
@@ -51,7 +51,7 @@ public class Main {
 
             reader = new FileReader(path);
             BufferedReader bf = new BufferedReader(reader);
-            String s = null;
+            String s = "";
 
             while (bf.ready()) {
                 s += bf.readLine();
@@ -82,6 +82,12 @@ public class Main {
 
         return null;
 
+    }
+
+    private static void printHelp() {
+        System.out.println("Usage: ts2pl <FILE> [EXPR]");
+        System.out.println("Usage: ts2pl <FILE> [EXPR]");
+        System.out.println("Parse definitions from FILE and evaluate EXPR if it is");
     }
 
 }
