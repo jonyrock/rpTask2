@@ -1,7 +1,7 @@
-package TreeNodeTypes;
+package treenodetypes;
 
 
-import LProgramm.LProgramRuntimeException;
+import lprogramm.exceptions.LProgramRuntimeException;
 
 public class VarNode extends TreeNode {
 
@@ -25,9 +25,8 @@ public class VarNode extends TreeNode {
 
         TreeNode t = getTreeValue();
 
-        if (t != null) {
-            if (!t.isTerm())
-                return "x\n" + t.toString();
+        if (t != null && !t.isTerm()) {
+            return "x\n" + t.toString();
         }
 
         return "x\n" + name + "\n";
@@ -49,12 +48,10 @@ public class VarNode extends TreeNode {
 
         TreeNode t = getTreeValue();
 
-        if (t != null) {
-            if (t.isTerm()) {
-                TreeNode tEval = t.evaluate();
-                tEval.parent = this.parent;
-                return tEval;
-            }
+        if (t != null && t.isTerm()) {
+            TreeNode tEval = t.evaluate();
+            tEval.parent = this.parent;
+            return tEval;
         }
 
         return this.copy();

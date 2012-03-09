@@ -1,4 +1,4 @@
-package TreeNodeTypes;
+package treenodetypes;
 
 
 public class VarNonValueNode extends TreeNode {

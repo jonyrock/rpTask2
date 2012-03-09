@@ -1,8 +1,8 @@
-package Compiler;
+package compiler;
 
-import Compiler.Parsing.Exceptions.ParsingException;
-import Compiler.Parsing.Parser;
-import TreeNodeTypes.TreeNode;
+import compiler.parsing.Parser;
+import compiler.parsing.exceptions.ParsingException;
+import treenodetypes.TreeNode;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

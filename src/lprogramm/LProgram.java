@@ -1,11 +1,12 @@
-package LProgramm;
+package lprogramm;
 
-import Compiler.LCompiler;
-import Compiler.Parsing.Exceptions.ParsingException;
-import Compiler.Parsing.Parser;
-import Compiler.Preprocessor;
-import TreeNodeTypes.TreeNode;
-import TreeNodeTypes.VarNode;
+import compiler.LCompiler;
+import compiler.Preprocessor;
+import compiler.parsing.Parser;
+import compiler.parsing.exceptions.ParsingException;
+import lprogramm.exceptions.LProgramRuntimeException;
+import treenodetypes.TreeNode;
+import treenodetypes.VarNode;
 
 
 public class LProgram {

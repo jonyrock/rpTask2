@@ -1,8 +1,8 @@
-package Compiler.Parsing;
+package compiler.parsing;
 
-import Compiler.Parsing.Exceptions.ParsingException;
-import TreeNodeTypes.ApplyNode;
-import TreeNodeTypes.TreeNode;
+import compiler.parsing.exceptions.ParsingException;
+import treenodetypes.ApplyNode;
+import treenodetypes.TreeNode;
 
 import java.util.ArrayList;
 
@@ -26,8 +26,7 @@ public class Parser {
 
         if (levelTokens.size() == 3) {
             String sign = levelTokens.get(1);
-            if (sign.equals("+") || sign.equals("-") ||
-                    sign.equals("*") || sign.equals("/")) {
+            if (OperationParser.ALLOWED_SIGNS.contains(sign)) {
 
                 return new OperationParser(levelTokens).parse();
 
@@ -58,11 +57,9 @@ public class Parser {
 
     private void raiseBracketsForOperations() {
 
-        raiseBracketsForOperation("*");
-        raiseBracketsForOperation("/");
-        raiseBracketsForOperation("-");
-        raiseBracketsForOperation("+");
-        raiseBracketsForOperation("%");
+        for (String operation : OperationParser.ALLOWED_SIGNS) {
+            raiseBracketsForOperation(operation);
+        }
 
     }
 
@@ -195,19 +192,13 @@ public class Parser {
 
             if (expression.charAt(i) == openChar) {
                 count++;
-                continue;
-            }
-
-            if (expression.charAt(i) == closeChar) {
+            } else if (expression.charAt(i) == closeChar) {
                 count--;
-                continue;
             }
 
         }
 
-        i++;
-
-        return i;
+        return ++i;
 
     }
 

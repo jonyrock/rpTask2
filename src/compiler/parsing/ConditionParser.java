@@ -1,8 +1,8 @@
-package Compiler.Parsing;
+package compiler.parsing;
 
-import Compiler.Parsing.Exceptions.ParsingException;
-import TreeNodeTypes.ConditionNode;
-import TreeNodeTypes.TreeNode;
+import compiler.parsing.exceptions.ParsingException;
+import treenodetypes.ConditionNode;
+import treenodetypes.TreeNode;
 
 import java.util.ArrayList;
 

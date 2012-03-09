@@ -1,4 +1,4 @@
-package LProgramm;
+package lprogramm.exceptions;
 
 public class LProgramRuntimeException extends Exception {
 

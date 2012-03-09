@@ -1,8 +1,8 @@
-package Compiler.Parsing;
+package compiler.parsing;
 
-import Compiler.Parsing.Exceptions.ParsingException;
-import TreeNodeTypes.ConstantNode;
-import TreeNodeTypes.TreeNode;
+import compiler.parsing.exceptions.ParsingException;
+import treenodetypes.ConstantNode;
+import treenodetypes.TreeNode;
 
 public class ConstantParser extends Parser {
 
@@ -13,14 +13,11 @@ public class ConstantParser extends Parser {
     @Override
     public TreeNode parse() throws ParsingException {
 
-        int val = 0;
         try {
-            val = Integer.parseInt(this.expression);
+            return new ConstantNode(Integer.parseInt(super.expression));
         } catch (java.lang.NumberFormatException e) {
             throw new ParsingException("Can't parse constant");
         }
 
-        return new ConstantNode(val);
-        
     }
 }

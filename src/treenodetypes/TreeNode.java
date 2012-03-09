@@ -1,6 +1,6 @@
-package TreeNodeTypes;
+package treenodetypes;
 
-import LProgramm.LProgramRuntimeException;
+import lprogramm.exceptions.LProgramRuntimeException;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -13,7 +13,7 @@ public class TreeNode {
     protected TreeNode parentSubstitution = null;
 
     public TreeNode() {
-        this.context = new HashMap<String, TreeNode>();
+        this.context = new HashMap<>();
     }
 
     public TreeNode evaluate() throws LProgramRuntimeException {
@@ -65,7 +65,7 @@ public class TreeNode {
     protected HashMap<String, TreeNode> cloneContext() {
 
         HashMap<String, TreeNode> newContext =
-                new HashMap<String, TreeNode>(context.size());
+                new HashMap<>(context.size());
 
         for (String key : this.context.keySet()) {
             TreeNode n = this.context.get(key).copy();

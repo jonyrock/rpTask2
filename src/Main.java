@@ -1,6 +1,6 @@
-import Compiler.Parsing.Exceptions.ParsingException;
-import LProgramm.LProgram;
-import TreeNodeTypes.TreeNode;
+import compiler.parsing.exceptions.ParsingException;
+import lprogramm.LProgram;
+import treenodetypes.TreeNode;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ public class Main {
         try {
             program = new LProgram(defs);
         } catch (ParsingException e) {
-            System.err.println("Parsing defs error: " + e.getMessage());
+            System.err.println("parsing defs error: " + e.getMessage());
             printHelp();
             System.exit(2);
         }
@@ -42,45 +42,29 @@ public class Main {
     }
 
     private static String getDefs(String path) {
-
-        FileReader reader = null;
         boolean wasError = false;
 
-        try {
-
-            reader = new FileReader(path);
-            BufferedReader bf = new BufferedReader(reader);
-            String s = "";
+        try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
+            StringBuilder s = new StringBuilder();
 
             while (bf.ready()) {
-                s += bf.readLine();
+                s.append(bf.readLine());
             }
 
-            return s;
+            return s.toString();
 
         } catch (FileNotFoundException e) {
-
             System.out.println("Can't open file");
             wasError = true;
-
         } catch (IOException e) {
-
             System.err.println(e.getMessage());
-
-        } finally {
-            try {
-                if (reader != null)
-                    reader.close();
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
         }
 
-        if (wasError)
+        if (wasError) {
             System.exit(1);
+        }
 
-        return null;
-
+        return "";
     }
 
     private static void printHelp() {

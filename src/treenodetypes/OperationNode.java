@@ -1,6 +1,6 @@
-package TreeNodeTypes;
+package treenodetypes;
 
-import LProgramm.LProgramRuntimeException;
+import lprogramm.exceptions.LProgramRuntimeException;
 
 public class OperationNode extends TreeNode {
 
@@ -68,24 +68,24 @@ public class OperationNode extends TreeNode {
         int leftValue = leftTree.getConstantValue().value;
         int rightValue = rightTree.getConstantValue().value;
 
-        if (this.operationSign.endsWith("+")) {
-            return new ConstantNode(leftValue + rightValue);
-        }
-        if (this.operationSign.endsWith("-")) {
-            return new ConstantNode(leftValue - rightValue);
-        }
-        if (this.operationSign.endsWith("*")) {
-            return new ConstantNode(leftValue * rightValue);
-        }
-        if (this.operationSign.endsWith("/")) {
-            return new ConstantNode(leftValue / rightValue);
-        }
-        if (this.operationSign.endsWith("%")) {
-            return new ConstantNode(leftValue % rightValue);
+        if (operationSign.length() != 1) {
+            throw new IllegalArgumentException("Undefined sign");
         }
 
-        throw new IllegalArgumentException("Undefined sign");
-
+        switch (operationSign.charAt(0)) {
+            case '+':
+                return new ConstantNode(leftValue + rightValue);
+            case '-':
+                return new ConstantNode(leftValue - rightValue);
+            case '*':
+                return new ConstantNode(leftValue * rightValue);
+            case '/':
+                return new ConstantNode(leftValue / rightValue);
+            case '%':
+                return new ConstantNode(leftValue % rightValue);
+            default:
+                throw new IllegalArgumentException("Undefined sign");
+        }
     }
 
 }

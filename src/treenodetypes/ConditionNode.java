@@ -1,7 +1,7 @@
-package TreeNodeTypes;
+package treenodetypes;
 
 
-import LProgramm.LProgramRuntimeException;
+import lprogramm.exceptions.LProgramRuntimeException;
 
 public class ConditionNode extends TreeNode {
 
