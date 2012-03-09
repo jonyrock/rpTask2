@@ -13,7 +13,7 @@ public class TreeNode {
     protected TreeNode parentSubstitution = null;
 
     public TreeNode() {
-        this.context = new HashMap<>();
+        this.context = new HashMap<String, TreeNode>();
     }
 
     public TreeNode evaluate() throws LProgramRuntimeException {
@@ -65,7 +65,7 @@ public class TreeNode {
     protected HashMap<String, TreeNode> cloneContext() {
 
         HashMap<String, TreeNode> newContext =
-                new HashMap<>(context.size());
+                new HashMap<String, TreeNode>(context.size());
 
         for (String key : this.context.keySet()) {
             TreeNode n = this.context.get(key).copy();

@@ -23,7 +23,7 @@ public class Main {
         try {
             program = new LProgram(defs);
         } catch (ParsingException e) {
-            System.err.println("parsing defs error: " + e.getMessage());
+            System.err.println("Parsing defs error: " + e.getMessage());
             printHelp();
             System.exit(2);
         }
@@ -42,29 +42,45 @@ public class Main {
     }
 
     private static String getDefs(String path) {
+
+        FileReader reader = null;
         boolean wasError = false;
 
-        try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
-            StringBuilder s = new StringBuilder();
+        try {
+
+            reader = new FileReader(path);
+            BufferedReader bf = new BufferedReader(reader);
+            String s = "";
 
             while (bf.ready()) {
-                s.append(bf.readLine());
+                s += bf.readLine();
             }
 
-            return s.toString();
+            return s;
 
         } catch (FileNotFoundException e) {
+
             System.out.println("Can't open file");
             wasError = true;
+
         } catch (IOException e) {
+
             System.err.println(e.getMessage());
+
+        } finally {
+            try {
+                if (reader != null)
+                    reader.close();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
         }
 
-        if (wasError) {
+        if (wasError)
             System.exit(1);
-        }
 
-        return "";
+        return null;
+
     }
 
     private static void printHelp() {
