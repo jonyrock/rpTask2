@@ -32,7 +32,7 @@ public class Main {
             System.out.println(program.root);
         } else {
             try {
-                TreeNode tree = program.evaluate(args[1]);
+                TreeNode tree = program.evaluate("{x->x 1}{y->y}");
                 System.out.print(tree);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -76,8 +76,9 @@ public class Main {
             }
         }
 
-        if (wasError)
+        if (wasError) {
             System.exit(1);
+        }
 
         return null;
 

@@ -53,7 +53,7 @@ public class FunctionNode extends TreeNode {
         n.body = n.body.evaluate();
 
         if (n.context.get(argName).isTerm()) {
-            return n.body;
+            return n.body.evaluate();
         } else {
             return n;
         }
