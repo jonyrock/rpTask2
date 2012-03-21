@@ -27,6 +27,8 @@ public class OperationParser extends Parser {
     public TreeNode parse() throws ParsingException {
 
         if (isSign(levelTokens.get(1))) {
+
+
             return new OperationNode(levelTokens.get(1),
                     new Parser(levelTokens.get(0)).parse(),
                     new Parser(levelTokens.get(2)).parse());

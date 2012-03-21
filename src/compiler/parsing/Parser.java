@@ -2,6 +2,8 @@ package compiler.parsing;
 
 import compiler.parsing.exceptions.ParsingException;
 import treenodetypes.ApplyNode;
+import treenodetypes.ConstantNode;
+import treenodetypes.OperationNode;
 import treenodetypes.TreeNode;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class Parser {
             fillLevelTokens();
         }
 
+        // if binary operation
         if (levelTokens.size() == 3) {
             String sign = levelTokens.get(1);
             if (OperationParser.ALLOWED_SIGNS.contains(sign)) {
@@ -35,9 +38,18 @@ public class Parser {
 
         raiseBracketsForOperations();
 
+        // if condition
         if (levelTokens.size() == 5) {
             if (levelTokens.get(1).equals("?")) {
                 return new ConditionParser(this.levelTokens).parse();
+            }
+        }
+
+        // if unary minus
+        if (levelTokens.size() == 2) {
+            if (levelTokens.get(0).equals("-")) {
+                return new OperationNode("*", new ConstantNode(-1),
+                        new Parser(levelTokens.get(1)).parse());
             }
         }
 
@@ -101,6 +113,7 @@ public class Parser {
 
 
     }
+
 
     private void fillLevelTokens() throws ParsingException {
 
