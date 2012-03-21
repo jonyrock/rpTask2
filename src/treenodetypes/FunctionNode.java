@@ -60,7 +60,7 @@ public class FunctionNode extends TreeNode {
     @Override
     public String toString() {
         return "{"
-                + super.context.get(argName).clearNameColumn() + " -> " + this.body.toString() +
+                + super.context.get(argName).clearName() + " -> " + this.body.toString() +
                 "}";
     }
 

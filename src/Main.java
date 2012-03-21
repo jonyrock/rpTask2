@@ -32,7 +32,7 @@ public class Main {
             System.out.println(program.root);
         } else {
             try {
-                TreeNode tree = program.evaluate("{x -> x - (-(x-(-x)))} 1");
+                TreeNode tree = program.evaluate("{x->(x 1)+(x 1)}{x->x+x}");
                 System.out.println(tree.toString());
             } catch (Exception e) {
                 System.err.println(e.getMessage());

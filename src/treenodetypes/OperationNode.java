@@ -33,13 +33,6 @@ public class OperationNode extends TreeNode {
 
     }
 
-    @Override
-    protected boolean canReturnConstant() throws LProgramRuntimeException {
-
-        return leftTree.canReturnConstant() &&
-                rightTree.canReturnConstant();
-
-    }
 
     @Override
     public TreeNode evaluate() throws LProgramRuntimeException {

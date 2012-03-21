@@ -36,7 +36,7 @@ public class VarNode extends TreeNode {
         TreeNode t = getTreeValue();
 
         if (t != null && t.isTerm()) {
-            TreeNode tEval = t.evaluate();
+            TreeNode tEval = t.copy().evaluate();
             tEval.parent = this.parent;
             return tEval;
         }
@@ -47,11 +47,11 @@ public class VarNode extends TreeNode {
 
     @Override
     protected boolean isTerm() {
-        return getTreeValue() != null;
+        //return getTreeValue() != null;
+        return false;
     }
 
     // printers
-
     @Override
     public String toString() {
 

@@ -31,20 +31,6 @@ public class TreeNode {
 
     }
 
-    @Override
-    public String toString() {
-
-        Set<String> keys = context.keySet();
-        String res = "";
-
-        for (String str : keys) {
-            res += str + "\n";
-            res += context.get(str).toString();
-        }
-
-        return res;
-
-    }
 
     // return null if can't find
     protected TreeNode findVarInContext(String name) {
@@ -96,16 +82,40 @@ public class TreeNode {
     }
 
     // printers
+
     public String clearName() {
         return this.toString();
     }
+
+    @Override
+    public String toString() {
+
+        Set<String> keys = context.keySet();
+        String res = "";
+
+        for (String str : keys) {
+            res += str + " = " + context.get(str).toString() + "\n";
+        }
+
+        return res;
+
+    }
+
 
     public String clearNameColumn() {
         return this.toStringColumn();
     }
 
     public String toStringColumn() {
-        return "Tree node";
+        Set<String> keys = context.keySet();
+        String res = "";
+
+        for (String str : keys) {
+            res += str + "\n";
+            res += context.get(str).toString();
+        }
+
+        return res;
     }
 
 
