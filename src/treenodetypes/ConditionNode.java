@@ -22,10 +22,6 @@ public class ConditionNode extends TreeNode {
 
     }
 
-    @Override
-    public String toString() {
-        return "?\n" + this.conditionTree + trueTree + falseTree;
-    }
 
     @Override
     public ConditionNode copy() {
@@ -53,6 +49,18 @@ public class ConditionNode extends TreeNode {
         }
 
         return t;
+    }
+
+    // printers
+
+    @Override
+    public String toString() {
+        return "(" + this.conditionTree + "?" + trueTree + " " + falseTree + ")";
+    }
+
+    @Override
+    public String toStringColumn() {
+        return "?\n" + this.conditionTree.toStringColumn() + trueTree.toStringColumn() + falseTree.toStringColumn();
     }
 
 }

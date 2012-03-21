@@ -21,19 +21,6 @@ public class VarNode extends TreeNode {
 
 
     @Override
-    public String toString() {
-
-        TreeNode t = getTreeValue();
-
-        if (t != null && !t.isTerm()) {
-            return "x\n" + t.toString();
-        }
-
-        return "x\n" + name + "\n";
-
-    }
-
-    @Override
     public TreeNode copy() {
 
         VarNode n = new VarNode(this.name);
@@ -63,4 +50,18 @@ public class VarNode extends TreeNode {
         return getTreeValue() != null;
     }
 
-}
+    @Override
+    public String toStringColumn() {
+
+        TreeNode t = getTreeValue();
+
+        if (t != null && !t.isTerm()) {
+            return "x\n" + t.toStringColumn();
+        }
+
+        return "x\n" + name + "\n";
+
+    }
+
+
+}   

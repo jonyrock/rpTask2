@@ -32,8 +32,8 @@ public class Main {
             System.out.println(program.root);
         } else {
             try {
-                TreeNode tree = program.evaluate("{x->x 1}{y->y}");
-                System.out.print(tree);
+                TreeNode tree = program.evaluate("{x->x 1}{y-> a ? 1 : 10}");
+                System.out.print(tree.toStringColumn());
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }

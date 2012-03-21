@@ -14,15 +14,6 @@ public class VarNonValueNode extends TreeNode {
         this.codeName = codeName;
     }
 
-    @Override
-    public String toString() {
-        return "x\n" + codeName + "\n";
-    }
-
-    @Override
-    public String clearName() {
-        return codeName;
-    }
 
     @Override
     public TreeNode copy() {
@@ -36,4 +27,17 @@ public class VarNonValueNode extends TreeNode {
     protected boolean isTerm() {
         return false;
     }
+
+    // printers
+    @Override
+    public String clearNameColumn() {
+        return codeName;
+    }
+
+    @Override
+    public String toStringColumn() {
+        return "x\n" + codeName + "\n";
+    }
+
+
 }

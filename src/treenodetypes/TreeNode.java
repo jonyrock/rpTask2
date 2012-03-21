@@ -91,12 +91,17 @@ public class TreeNode {
         this.parentSubstitution = treeNode.copy();
     }
 
-    public String clearName() {
-        return this.toString();
+    public String clearNameColumn() {
+        return this.toStringColumn();
     }
 
     protected boolean isTerm() {
         return true;
+    }
+
+
+    public String toStringColumn() {
+        return "Tree node";
     }
 
 }

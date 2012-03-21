@@ -18,10 +18,6 @@ public class ApplyNode extends TreeNode {
 
     }
 
-    @Override
-    public String toString() {
-        return "a\n" + function.toString() + argument.toString();
-    }
 
     @Override
     public ApplyNode copy() {
@@ -57,6 +53,16 @@ public class ApplyNode extends TreeNode {
 
     }
 
+    // printers
+
+    @Override
+    public String toString() {
+        return function.toString() + " " + argument.toString();
+    }
+
+    public String toStringColumn() {
+        return "a\n" + function.toStringColumn() + argument.toStringColumn();
+    }
 
 }
 

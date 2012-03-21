@@ -11,10 +11,6 @@ public class ConstantNode extends TreeNode {
         this.value = value;
     }
 
-    @Override
-    public String toString() {
-        return "!\n" + value + "\n";
-    }
 
     @Override
     public TreeNode copy() {
@@ -42,4 +38,17 @@ public class ConstantNode extends TreeNode {
     public ConstantNode getConstantValue() throws LProgramRuntimeException {
         return this;
     }
+
+    // printers
+
+    @Override
+    public String toString() {
+        return value + "";
+    }
+
+    @Override
+    public String toStringColumn() {
+        return "!\n" + value + "\n";
+    }
+
 }

@@ -19,11 +19,6 @@ public class OperationNode extends TreeNode {
 
     }
 
-    @Override
-    public String toString() {
-        return "@\n" + this.operationSign + "\n" +
-                leftTree.toString() + rightTree.toString();
-    }
 
     @Override
     public OperationNode copy() {
@@ -86,6 +81,12 @@ public class OperationNode extends TreeNode {
             default:
                 throw new IllegalArgumentException("Undefined sign");
         }
+    }
+
+    @Override
+    public String toStringColumn() {
+        return "@\n" + this.operationSign + "\n" +
+                leftTree.toStringColumn() + rightTree.toStringColumn();
     }
 
 }

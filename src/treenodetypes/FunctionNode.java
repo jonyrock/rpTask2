@@ -22,11 +22,6 @@ public class FunctionNode extends TreeNode {
         this.argName = argName;
     }
 
-    @Override
-    public String toString() {
-        return "f\n" + super.context.get(argName).clearName() + "\n"
-                + this.body.toString();
-    }
 
     @Override
     public FunctionNode copy() {
@@ -58,6 +53,14 @@ public class FunctionNode extends TreeNode {
             return n;
         }
 
+    }
+
+    // printers
+
+    @Override
+    public String toStringColumn() {
+        return "f\n" + super.context.get(argName).clearNameColumn() + "\n"
+                + this.body.toStringColumn();
     }
 
 }
