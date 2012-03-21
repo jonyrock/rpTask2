@@ -54,12 +54,12 @@ public class ApplyNode extends TreeNode {
     }
 
     // printers
-
     @Override
     public String toString() {
         return function.toString() + " " + argument.toString();
     }
 
+    @Override
     public String toStringColumn() {
         return "a\n" + function.toStringColumn() + argument.toStringColumn();
     }

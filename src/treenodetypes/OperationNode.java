@@ -83,6 +83,14 @@ public class OperationNode extends TreeNode {
         }
     }
 
+
+    // printers
+    @Override
+    public String toString() {
+        return "(" + leftTree.toString() + " " + this.operationSign + " "
+                + rightTree.toString() + ")";
+    }
+
     @Override
     public String toStringColumn() {
         return "@\n" + this.operationSign + "\n" +

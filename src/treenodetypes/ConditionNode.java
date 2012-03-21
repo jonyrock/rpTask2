@@ -55,7 +55,7 @@ public class ConditionNode extends TreeNode {
 
     @Override
     public String toString() {
-        return "(" + this.conditionTree + "?" + trueTree + " " + falseTree + ")";
+        return "(" + this.conditionTree + " ? " + trueTree + " : " + falseTree + ")";
     }
 
     @Override

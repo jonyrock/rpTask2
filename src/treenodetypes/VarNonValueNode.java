@@ -29,6 +29,13 @@ public class VarNonValueNode extends TreeNode {
     }
 
     // printers
+
+
+    @Override
+    public String toString() {
+        return codeName;
+    }
+
     @Override
     public String clearNameColumn() {
         return codeName;

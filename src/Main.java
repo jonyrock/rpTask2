@@ -1,3 +1,4 @@
+import compiler.parsing.Parser;
 import compiler.parsing.exceptions.ParsingException;
 import lprogramm.LProgram;
 import treenodetypes.TreeNode;
@@ -32,8 +33,9 @@ public class Main {
             System.out.println(program.root);
         } else {
             try {
-                TreeNode tree = program.evaluate("{x->x 1}{y-> a ? 1 : 10}");
-                System.out.print(tree.toStringColumn());
+                //TreeNode tree = program.evaluate("");
+                TreeNode tree = new Parser("{x->x x}(50 - y + 4){f-> f - 5}").parse();
+                System.out.println(tree.toString());
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }

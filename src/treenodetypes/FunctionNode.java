@@ -58,6 +58,13 @@ public class FunctionNode extends TreeNode {
     // printers
 
     @Override
+    public String toString() {
+        return "{"
+                + super.context.get(argName).clearNameColumn() + " -> " + this.body.toString() +
+                "}";
+    }
+
+    @Override
     public String toStringColumn() {
         return "f\n" + super.context.get(argName).clearNameColumn() + "\n"
                 + this.body.toStringColumn();

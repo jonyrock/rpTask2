@@ -50,6 +50,21 @@ public class VarNode extends TreeNode {
         return getTreeValue() != null;
     }
 
+    // printers
+
+    @Override
+    public String toString() {
+
+        TreeNode t = getTreeValue();
+
+        if (t != null && !t.isTerm()) {
+            return t.toString();
+        }
+
+        return name;
+
+    }
+
     @Override
     public String toStringColumn() {
 
